@@ -1,0 +1,109 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+@import "../node_modules/@fortawesome/fontawesome-free/css/all.min.css";
+
+body {
+    margin: 0;
+}
+
+.inv-table-container {
+    width: 100%;
+    margin-top: 2%;
+    display: flex;
+    flex-direction: column;
+
+    .inv-container-header{
+        text-align: start;
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 0;
+    }
+
+    .btn {
+        font-size: 0.8rem;
+    }
+}
+
+.inv-table {
+    width: 70%;
+    font-size: 0.8rem;
+    align-self: center;
+    border: 1px solid #c6c6c6;
+    margin-top: 1%;
+
+    th {
+        background-color: #6cbaff;
+        padding: 1% 2%;
+    }
+
+    td {
+        padding: 1% 2%;
+    }
+}
+
+.inv-detail-container {
+    width: 50%;
+    margin: 0% 2%;
+}
+
+.save-btn {
+    width: 10%;
+    background-color: #259aff;
+    border-color: #0072d5;
+    margin: 2% 0.5rem;
+}
+
+.cancel-btn{
+    width: 10%;
+    background-color: #a8a8a8;
+    border-color: #5e5e5e;
+    margin: 2% 0.5rem;
+}
+
+.switch {
+    position: relative !important;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+
+    input {
+        opacity: 0%;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #fff;
+        -webkit-transition: 0.4s;
+        transition: 0.4s;
+
+        ::before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 1%;
+            bottom: 1%;
+        }
+    }
+    round {
+        border-radius: 50%;
+    }
+
+    input:checked + .slider {
+        background-color: green;
+    }
+    input:focus + .slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
+    input:checked + .slider:before {
+        -webkit-transform: translateX(100%);
+        -ms-transform: translateX(100%);
+        transform: translateX(100%);
+    }
+}

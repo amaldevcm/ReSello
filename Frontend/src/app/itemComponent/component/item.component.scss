@@ -1,0 +1,20 @@
+.card{
+    width: 130px;
+
+}
+
+.item-detail{
+
+    #itemName{
+        display: block;
+    }
+
+    #itemQty{
+        display: none;
+    }
+
+    :hover > #itemName {
+            display: none;
+        
+    }
+}

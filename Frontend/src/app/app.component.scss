@@ -1,0 +1,34 @@
+
+.top-nav{
+    height: 75px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: black;
+    background-color: #c6c6c6;
+
+    span{
+        // width: 75%;
+        font-size: 50px;
+        font-weight: 600;
+        font-family: cursive;
+    }
+    img{
+        width: 5%;
+        height: 70%;
+    }
+
+    ul li {
+        color: black;
+        display: inline;
+        margin-left: 2%;
+
+        a{
+            text-decoration: none;
+            color: black;
+            font-size: 20px;
+            font-weight: 650;
+        }
+    }
+}

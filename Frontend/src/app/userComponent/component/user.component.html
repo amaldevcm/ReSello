@@ -1,0 +1,29 @@
+
+<div class="inv-table-container" *ngIf="!isEdited">
+    <div class="row">
+        <p class="inv-container-header col">Users</p>
+        <button class="btn btn-primary col-1" routerLink="/user/create" routerLinkActive="false">New user</button>
+    </div>
+    <hr>
+
+    <table class="inv-table" [cellSpacing]="0">
+        <tr>
+            <th>SNo.</th>
+            <th>Name</th>
+            <th>Created date</th>
+            <th>Updated date</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+        <tr *ngFor="let user of userList; let i = index">
+            <td>{{i+1}}</td>
+            <td>{{user.name}}</td>
+            <td>{{user.createdDate? user.createdDate: '-'}}</td>
+            <td>{{user.updatedDate? user.updatedDate: '-'}}</td>
+            <td>{{user.status}}</td>
+            <td><a href="javascript:void(0)" (click)="editData(user)">Edit</a></td>
+        </tr>
+    </table>
+</div>
+
+<app-user-create *ngIf="isEdited" [isEdited]="isEdited" [data]="userData" (output)="cancel()"></app-user-create>
