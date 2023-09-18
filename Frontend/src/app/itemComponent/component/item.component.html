@@ -1,25 +1,8 @@
-<!-- <div class="p-1">
-    <div class="card">
-        <div class="row">
-            <img class="px-0" src="https://2rdnmg1qbg403gumla1v9i2h-wpengine.netdna-ssl.com/wp-content/uploads/sites/3/2015/03/chocolateWhiteDark-454384771-770x533-1-690x455.jpg" alt="">
-        </div>
-        <div class="row item-detail">
-            <span class="btn-secondary" id="itemName">Chocolate</span>
-        
-            <div id="itemQty">
-                <button class="col btn btn-secondary"  (click)="subtractOne()">-</button>
-                <span class="col form-control">{{itemQty}}</span>
-                <button class="col btn btn-secondary" (click)="addOne()">+</button>
-            </div>
-        </div>
-    </div>
-</div> -->
 
-
-<div class="inv-table-container">
+<div class="inv-table-container" *ngIf="!isEdited">
     <div class="row">
         <p class="inv-container-header col">Items</p>
-        <button class="btn btn-primary col-1">New item</button>
+        <button class="btn btn-primary col-1" routerLink="/item/create" routerLinkActive="false">New item</button>
     </div>
     <hr>
 
@@ -38,7 +21,11 @@
             <td>{{item.createdDate? item.createdDate: '-'}}</td>
             <td>{{item.updatedDate? item.updatedDate: '-'}}</td>
             <td>{{item.status}}</td>
-            <td><a href="javascript:void(0)" routerLink="/item/create" routerLinkActive="false">Edit</a></td>
+            <td><a href="javascript:void(0)" (click)="editItem(item)">Edit</a></td>
         </tr>
     </table>
+
+    <app-pagination></app-pagination>
 </div>
+
+<app-item-create *ngIf="isEdited" [isEdited]="isEdited" (output)="cancel()" [data]="editData"></app-item-create>

@@ -29,12 +29,13 @@
                 <label for="confirmPass" class="col-4">Confirm Password</label>
                 <input class="col-md form-control" type="password" name="confirmPass" id="confirmPass" [(ngModel)]="data.confirmPass" formControlName="confirmPass">
             </div>
-            <div class="row my-1" *ngIf="isEdited">
-                <label for="status" class="col-4">Status</label>
+            <!-- <div class="row my-1" *ngIf="isEdited"> -->
+            <div class="row my-1">
+                <label class="col-4">Status</label>
                 <!-- <input class="col-1form-control" type="checkbox" name="status" id="status" [(ngModel)]="data.status" formControlName="status"> -->
-                <label for="switch">
+                <label for="status" class="switch">
                     <input type="checkbox" name="status" id="status" [(ngModel)]="data.status" formControlName="status">
-                    <span class="slider round"></span>
+                    <span class="slider" data-label-on="Active" data-label-off="Inactive"></span>
                 </label>
             </div>
 

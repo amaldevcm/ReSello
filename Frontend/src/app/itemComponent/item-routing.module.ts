@@ -5,7 +5,7 @@ import { ItemCreateComponent } from "./component/item-create.component";
 
 const routes: Routes = [
     { path: '', component: ItemsComponent },
-    { path: '/create', component: ItemCreateComponent }
+    { path: 'create', component: ItemCreateComponent }
 ];
 
 @NgModule({

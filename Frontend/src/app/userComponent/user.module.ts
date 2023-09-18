@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { UserCreateComponent } from "./component/user-create.component";
 import { UserRoutingModule } from "./user-routing.module";
+import { AppCommonModule } from "../app-common/common.module";
 
 @NgModule({
     declarations: [
@@ -16,7 +17,8 @@ import { UserRoutingModule } from "./user-routing.module";
         FormsModule,
         HttpClientModule,
         UserRoutingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        AppCommonModule
     ]
 })
 

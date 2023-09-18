@@ -9,12 +9,13 @@
 <div [hidden]="!isAdmin" class="py-2">
     <!-- Admin Page -->
     <div class="menuItems">
-        <div class="menu-card">
+        <div class="menu-card" *ngFor="let item of itemList">
             <div class="menu-header">
-                <img src="" alt="">
+                <img src="../../../assets/food-g2b5b789c3_1280.jpg" alt="">
             </div>
-            <div class="menu-body">
-                
+            <div class="menu-body row">
+                <h4 class="col">{{item.name}}</h4>
+                <span class="col-2"><i>&#8377;</i>{{item.selling}}</span>
             </div>
         </div>
     </div>

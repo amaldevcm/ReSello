@@ -24,8 +24,8 @@ export class UserComponent implements OnInit{
             if(response && response !== undefined) {
                 this.userList = response['users'];
                 this.userList.forEach(user => {
-                    user.createdDate = moment(user.createdDate).format('DD-MM-YYYY');
-                    user.updatedDate = moment(user.updatedDate).format('DD-MM-YYYY');
+                    user.createdDate = user.createdDate? moment(user.createdDate).format('DD-MM-YYYY'): null;
+                    user.updatedDate = user.updatedDate? moment(user.updatedDate).format('DD-MM-YYYY'): null;
                 })
             }   
         })

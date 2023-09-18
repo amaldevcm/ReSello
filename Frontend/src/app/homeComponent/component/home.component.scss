@@ -3,9 +3,32 @@
     height: 300px;
 }
 
+.menuitems {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
 .menu-card {
-    width: 10%;
-    height: 20%;
+    display: inline-block;
+    width: 12%;
+    height: 25%;
     border: 1px solid grey;
-    box-shadow: 1px 1px 1px rgb(186, 186, 186);
+    box-shadow: 1px 1px 1px #bababa;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-right: 1%;
+
+    :hover() {
+        box-shadow: 1px 1px 13px #828282;
+    }
+
+    .menu-body {
+        width: 100%;
+    }
+
+    img {
+        width: 100%;
+
+    }
 }

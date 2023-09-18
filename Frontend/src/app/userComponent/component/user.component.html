@@ -24,6 +24,8 @@
             <td><a href="javascript:void(0)" (click)="editData(user)">Edit</a></td>
         </tr>
     </table>
+
+    <app-pagination></app-pagination>
 </div>
 
 <app-user-create *ngIf="isEdited" [isEdited]="isEdited" [data]="userData" (output)="cancel()"></app-user-create>

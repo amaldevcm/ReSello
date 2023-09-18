@@ -1,4 +1,52 @@
 <div class="inv-table-container">
-    <p class="inv-container-header">New Item</p>
+    <p class="inv-container-header">{{isEdited? 'Update User':'New User'}}</p>
     <hr>
+
+    <form autocomplete="off" [formGroup]="itemForm">
+        <div class="inv-detail-container row">
+            <div class="row my-1">
+                <label for="itemName" class="col-md-4">Name</label>
+                <input class="col-md form-control" type="text" name="itemName" id="itemName" [(ngModel)]="data.name" formControlName="name">
+            </div>
+            <div class="row my-1">
+                <label for="itemType" class="col-md-4">Item type</label>
+                <!-- <input class="col-md form-control" type="text" name="type" id="type" [(ngModel)]="data.type" formControlName="type"> -->
+                <select class="col-md form-select" name="itemType" id="itemType" [(ngModel)]="data.type" formControlName="type">
+                    <option value="Veg">Vegitarian</option>
+                    <option value="NonVeg">Non-Vegitarian</option>
+                    <option value="dessert">Dessert</option>
+                </select>
+            </div>
+            <div class="row my-1">
+                <label for="cost" class="col-md-4">Cost</label>
+                <input class="col-md form-control" type="text" name="cost" id="cost" [(ngModel)]="data.cost" formControlName="cost">
+            </div>
+            <div class="row my-1">
+                <label for="selling" class="col-md-4">Selling</label>
+                <input class="col-md form-control" type="text" name="selling" id="selling" formControlName="selling" [(ngModel)]="data.selling">
+            </div>
+            <div class="row my-1">
+                <label for="image" class="col-md-4">Image</label>
+                <input class="col-md form-control" type="file" name="image" id="image" [(ngModel)]="data.image" formControlName="image">
+            </div>
+            <!-- <div class="row my-1" *ngIf="isEdited"> -->
+            <div class="row my-1">
+                <label class="col-md-4">Status</label>
+                <!-- <input class="col-1form-control" type="checkbox" name="status" id="status" [(ngModel)]="data.status" formControlName="status"> -->
+                <label for="status" class="switch">
+                    <input type="checkbox" name="status" id="status" [(ngModel)]="data.status" formControlName="status">
+                    <span class="slider" data-label-on="Active" data-label-off="Inactive"></span>
+                </label>
+            </div>
+
+
+            <div class="row">
+                <button class="btn btn-primary save-btn" (click)="saveItem()">Save</button>
+                <button class="btn btn-secondary cancel-btn" (click)="cancel()">Cancel</button>
+            </div>
+        </div>
+
+        <div class="row">
+        </div>
+    </form>
 </div>

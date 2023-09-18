@@ -1,5 +1,6 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { CommonService } from "../../common.service";
+import { HttpClient } from "@angular/common/http";
 
 @Component({
     selector: 'app-home',
@@ -7,9 +8,23 @@ import { CommonService } from "../../common.service";
     styleUrls: ['./home.component.scss'],
 })
 
-export class HomeComponent {
+export class HomeComponent implements OnInit{
     isAdmin: boolean = false;
-    constructor(private common: CommonService) {
+    itemList = [];
+
+    constructor(private common: CommonService, private http: HttpClient) {
         this.isAdmin = this.common.isAdmin;
+    }
+
+    ngOnInit(): void {
+        this.getItemList();
+    }
+
+    getItemList() {
+        this.http.get("http://localhost:3000/api/items").subscribe(result => {
+            if(result && result !== undefined) {
+                this.itemList = result['items'];
+            }
+        });
     }
 }
