@@ -7,7 +7,8 @@
     justify-content: space-between;
     align-items: center;
     color: black;
-    background-color: #c6c6c6;
+    background-color: #8bbcff;
+    margin-bottom: 1%;
 
     span{
         // width: 75%;
@@ -17,17 +18,16 @@
     }
     img{
         width: 5%;
-        height: 70%;
+        border-radius: 50%;
     }
 
     ul li {
-        color: black;
         display: inline;
         margin-left: 2%;
 
         a{
             text-decoration: none;
-            color: black;
+            color: #fff;
             font-size: 20px;
             font-weight: 650;
         }
