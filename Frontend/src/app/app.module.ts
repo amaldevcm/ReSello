@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonService } from './common.service';
 import { HttpClientModule } from '@angular/common/http' 
 import { CommonModule } from '@angular/common';
-import { PaginationComponent } from './app-common/pagination/pagination.component';
+import { AppCommonModule } from './app-common/common.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,8 @@ import { PaginationComponent } from './app-common/pagination/pagination.componen
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppCommonModule
   ],
   providers: [CommonService],
   bootstrap: [AppComponent]

@@ -18,6 +18,10 @@
                 </select>
             </div>
             <div class="row my-1">
+                <label for="desc" class="col-md-4">Description</label>
+                <textarea class="col-md form-control" type="text" name="desc" id="desc" formControlName="description" [(ngModel)]="data.description"></textarea>
+            </div>
+            <div class="row my-1">
                 <label for="cost" class="col-md-4">Cost</label>
                 <input class="col-md form-control" type="text" name="cost" id="cost" [(ngModel)]="data.cost" formControlName="cost">
             </div>
@@ -29,10 +33,8 @@
                 <label for="image" class="col-md-4">Image</label>
                 <input class="col-md form-control" type="file" name="image" id="image" [(ngModel)]="data.image" formControlName="image">
             </div>
-            <!-- <div class="row my-1" *ngIf="isEdited"> -->
-            <div class="row my-1">
+            <div class="row my-1" *ngIf="isEdited">
                 <label class="col-md-4">Status</label>
-                <!-- <input class="col-1form-control" type="checkbox" name="status" id="status" [(ngModel)]="data.status" formControlName="status"> -->
                 <label for="status" class="switch">
                     <input type="checkbox" name="status" id="status" [(ngModel)]="data.status" formControlName="status">
                     <span class="slider" data-label-on="Active" data-label-off="Inactive"></span>

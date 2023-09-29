@@ -7,7 +7,7 @@ import { CommonModule } from "@angular/common";
         PaginationComponent
     ],
     imports: [
-        CommonModule,
+        CommonModule
     ],
     exports: [
         PaginationComponent

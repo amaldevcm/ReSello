@@ -14,7 +14,8 @@ const itemSchema = new mongoose.Schema({
         type: String,
         required: false,
         default: 'Active'
-    }
+    },
+    description: String
 });
 
 const Item = new mongoose.model('Items', itemSchema);

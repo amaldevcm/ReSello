@@ -16,10 +16,27 @@
             <div class="menu-body">
                 <div class="row">
                     <span class="col menu-title">{{item.name}}</span>
-                    <span class="col-2"><i>&#8377;</i>{{item.selling}}</span>
+                    <span class="col-2 menu-price"><i>&#8377;</i>{{item.selling}}</span>
                 </div>
                 <div class="row">
-                    <span class="rating"></span>
+                    <p class="menu-desc">{{item.description}}</p>
+                </div>
+                <div class="row">
+                    <div class="rating col">
+                        <i data-feather="search" class="col-sm-1 p-0"></i>
+                        <i data-feather="heart"></i>
+                        <i data-feather="heart"></i>
+                        <i data-feather="heart"></i>
+                        <i data-feather="heart"></i>
+                    </div>
+                </div>
+                <div class="row" *ngIf="!item.cartQty || item.cartQty <= 0">
+                    <button class="btn btn-primary addCart" (click)="changeQty(item, 'add')">Add to cart</button>
+                </div>
+                <div class="cartQty" *ngIf="item.cartQty > 0">
+                        <button class="col" (click)="changeQty(item, 'add')">+</button>
+                        <input type="text" class="col" [(ngModel)]="item.cartQty">
+                        <button class="col" (click)="changeQty(item,'subtract')">-</button>
                 </div>
             </div>
         </div>
