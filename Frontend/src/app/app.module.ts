@@ -8,6 +8,7 @@ import { CommonService } from './common.service';
 import { HttpClientModule } from '@angular/common/http' 
 import { CommonModule } from '@angular/common';
 import { AppCommonModule } from './app-common/common.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { AppCommonModule } from './app-common/common.module';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    AppCommonModule
+    AppCommonModule,
+    BrowserAnimationsModule
   ],
   providers: [CommonService],
   bootstrap: [AppComponent]

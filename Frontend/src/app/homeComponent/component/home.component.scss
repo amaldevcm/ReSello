@@ -11,12 +11,13 @@ $bg-color: #5C9DF2;
 .menu-card {
     position: relative;
     display: inline-block;
-    width: 12%;
-    height: 210px;
+    width: 13%;
+    height: 250px;
     border: 1px solid #9db7d8;
     border-radius: 15px;
     overflow: hidden;
     margin-right: 1%;
+    margin-bottom: 1%;
     background-color: #fff;
     flex-grow: 1;
 
@@ -44,6 +45,7 @@ $bg-color: #5C9DF2;
         font-size: 15px;
         font-weight: 500;
         color: grey;
+        text-align: end;
     }
 
     .menu-desc{
@@ -52,12 +54,21 @@ $bg-color: #5C9DF2;
         text-overflow: ellipsis;
         white-space: nowrap;
     }
-
-    // .rating{
-
-    // }
 }
+.rating{
+    position: absolute;
+    top: 1%;
+    right: 2%;
+    background-color: #fff;
+    border-radius: 20px;
+    z-index: 2;
+    padding: 1%;
+    font-size: 1rem;
 
+    i{
+        color: yellow;
+    }
+}
 // .menu-card:hover {
 //     width: 13%;
 //     height: 220px;
@@ -69,18 +80,19 @@ $bg-color: #5C9DF2;
 .addCart {
     position: absolute;
     width: fit-content;
-    font-size: 0.6rem;
+    font-size: 0.7rem;
     margin: auto;
     bottom: 2%;
     left:25%;
+    font-weight: 500;
 }
 
 .cartQty {
     width: 70% !important;
-    height: 12%;
+    height: 10%;
     display: flex;
     flex-direction: row;
-    border-radius: 10px;
+    border-radius: 20px;
     border: 1px solid $border-color;
     position: absolute;
     font-size: 0.6rem;
@@ -88,6 +100,8 @@ $bg-color: #5C9DF2;
     bottom: 2%;
     left:15%;
     overflow: hidden;
+    font-size: 0.7rem;
+    font-weight: 500;
 
     button{
         border: none;
@@ -96,7 +110,7 @@ $bg-color: #5C9DF2;
     }
     button:hover{
         color: white;
-        background-color: $bg-color;
+        background-color: #0d6efd;
     }
 
     input{
@@ -107,4 +121,11 @@ $bg-color: #5C9DF2;
         text-align:center;
         outline: none;
     }
+}
+
+.cart-icon {
+    position: absolute;
+    bottom: 2%;
+    right: 1%;
+    padding: 1%;
 }

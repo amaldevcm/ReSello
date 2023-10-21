@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { AfterViewInit, Component, OnInit } from "@angular/core";
 import { CommonService } from "../../common.service";
 import { HttpClient } from "@angular/common/http";
 import * as feather from 'feather-icons';
@@ -9,17 +9,20 @@ import * as feather from 'feather-icons';
     styleUrls: ['./home.component.scss'],
 })
 
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit,AfterViewInit{
     isAdmin: boolean = false;
     itemList = [];
 
     constructor(private common: CommonService, private http: HttpClient) {
-        feather.replace();  
         this.isAdmin = this.common.isAdmin;
     }
 
     ngOnInit(): void {
         this.getItemList();
+    }
+
+    ngAfterViewInit(): void {
+        feather.replace();         
     }
 
     getItemList() {
