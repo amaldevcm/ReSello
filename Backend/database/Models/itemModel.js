@@ -15,7 +15,12 @@ const itemSchema = new mongoose.Schema({
         required: false,
         default: 'Active'
     },
-    description: String
+    description: String,
+    discount: {
+        type: Number,
+        default: 0,
+        required: false
+    }
 });
 
 const Item = new mongoose.model('Items', itemSchema);

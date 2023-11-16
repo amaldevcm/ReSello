@@ -7,4 +7,5 @@ import { Injectable } from "@angular/core";
 export class CommonService {
     isAdmin: boolean = true;
     currentUser: Object;
+    cart: any = [];
 }

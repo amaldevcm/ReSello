@@ -12,9 +12,12 @@ import * as feather from 'feather-icons';
 export class HomeComponent implements OnInit,AfterViewInit{
     isAdmin: boolean = false;
     itemList = [];
+    cart = [];
+    showCartItems = false;
 
     constructor(private common: CommonService, private http: HttpClient) {
         this.isAdmin = this.common.isAdmin;
+        this.cart = this.common.cart;
     }
 
     ngOnInit(): void {
@@ -38,9 +41,17 @@ export class HomeComponent implements OnInit,AfterViewInit{
     }
 
     changeQty(data, opr) {
-        if(opr === "subtract")
+        if(opr === "subtract") {
             data.cartQty -= 1;
-        else    
+        } else {
             data.cartQty += 1;
+        }
+        this.cart = this.itemList.filter(data => data.cartQty !== 0);
+        this.common.cart = this.cart;
+    }
+
+    toggleCartItems(){
+        this.showCartItems = !this.showCartItems;
     }
 }
+

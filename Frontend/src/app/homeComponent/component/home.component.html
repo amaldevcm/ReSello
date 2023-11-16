@@ -7,11 +7,9 @@
 
 </div>
 <div class="cart-icon">
-    <button type="button" class="btn position-relative">
+    <button type="button" class="btn position-relative" (click)="toggleCartItems()">
         <i data-feather="shopping-cart"></i>
-        <span class="position-absolute top-0 start-100 translate-middle badge bg-danger">
-            
-        </span>
+        <span class="position-absolute top-0 start-100 translate-middle badge bg-danger" *ngIf="cart.length !== 0 && !showCartItems"> {{ cart.length }} </span>
     </button>
 </div>
 
@@ -34,15 +32,30 @@
                     <button class="btn btn-primary addCart" (click)="changeQty(item, 'add')">Add to cart</button>
                 </div>
                 <div class="cartQty" *ngIf="item.cartQty > 0">
-                    <button class="col" (click)="changeQty(item, 'add')"><i data-feather="plus"></i></button>
+                    <button class="col" (click)="changeQty(item, 'add')">+</button>
                     <input type="text" class="col" [(ngModel)]="item.cartQty">
                     <button class="col" (click)="changeQty(item,'subtract')">-</button>
                 </div>
             </div>
-            <div class="rating">
+            <!-- <div class="rating">
                 <i data-feather="heart"></i>
+                <img class="item-fav" src="../../../assets/star.svg" alt="fav">
                 <span>4</span>
+            </div> -->
+            <div class="discount">
+                <span>10%</span>
             </div>
         </div>
     </div>
 </div>
+
+<!-- <div class="cart" *ngIf="showCartItems && cart.length !== 0">
+    <div class="cart-item" *ngFor="let item of cart">
+        <img class="item-pic" src="../../../assets/food-g2b5b789c3_1280.jpg" alt="">
+        <div class="item-details">
+            <span class="">{{item.name}}</span>
+            <span class="price row"></span>
+        </div>
+        <span class="item-qty">{{item.cartQty}}</span>
+    </div>
+</div> -->
