@@ -4,46 +4,73 @@
         <img class="bg-img" src="../../assets/food-g2b5b789c3_1280.jpg" alt="">
         <div class=""></div>
     </div>
-
 </div>
-<div class="cart-icon">
+
+<div class="cart-icon" [hidden]="showCartItems">
     <button type="button" class="btn position-relative" (click)="toggleCartItems()">
-        <i data-feather="shopping-cart"></i>
+        <!-- <i data-feather="shopping-cart"></i> -->
+        <i class="bi bi-cart3"></i>
         <span class="position-absolute top-0 start-100 translate-middle badge bg-danger" *ngIf="cart.length !== 0 && !showCartItems"> {{ cart.length }} </span>
     </button>
 </div>
 
-<div [hidden]="!isAdmin" class="py-2">
-    <!-- Admin Page -->
-    <div class="menuItems">
-        <div class="menu-card" *ngFor="let item of itemList">
-            <div class="menu-header">
-                <img src="../../../assets/food-g2b5b789c3_1280.jpg" alt="">
+<div class="row m-0">
+    <div [hidden]="!isAdmin" class="p-3 col">
+        <!-- Admin Page -->
+        <div class="menuItems">
+            <div class="menu-card" *ngFor="let item of itemList">
+                <div class="menu-header">
+                    <img src="../../../assets/food-g2b5b789c3_1280.jpg" alt="">
+                </div>
+                <div class="container">
+                    <div class="row p-1">
+                        <span class="col menu-title p-0">{{item.name}}</span>
+                        <span class="col-4 menu-price p-0"><i>&#8377;</i> {{item.selling}}</span>
+                    </div>
+                    <div class="row p-1">
+                        <p class="menu-desc p-0">{{item.description}}</p>
+                    </div>
+                    <div class="row" *ngIf="!item.cartQty || item.cartQty <= 0">
+                        <button class="btn btn-primary addCart" (click)="changeQty(item, 'add')">Add to cart</button>
+                    </div>
+                    <div class="cartQty" *ngIf="item.cartQty > 0">
+                        <button class="col" (click)="changeQty(item, 'add')">+</button>
+                        <input type="text" class="col" [(ngModel)]="item.cartQty">
+                        <button class="col" (click)="changeQty(item,'subtract')">-</button>
+                    </div>
+                </div>
+                <!-- <div class="rating">
+                    <i data-feather="heart"></i>
+                    <img class="item-fav" src="../../../assets/star.svg" alt="fav">
+                    <span>4</span>
+                </div> -->
+                <div class="discount">
+                    <span>10%</span>
+                </div>
             </div>
-            <div class="container">
-                <div class="row p-1">
-                    <span class="col menu-title p-0">{{item.name}}</span>
-                    <span class="col-4 menu-price p-0"><i>&#8377;</i> {{item.selling}}</span>
+        </div>
+    </div>
+
+    <div class="col-3 cart-item-desc py-1" *ngIf="showCartItems">
+        <div style="display: flex; justify-content: space-between;">
+            <button class="btn close-btn``  " (click)="toggleCartItems()"><i class="bi bi-x"></i></button>
+            <div style="display: flex; align-items: center;">
+                Total: <span>{{totalAmount}}</span>
+            </div>
+        </div>
+
+        <div class="cart-list">
+            <div class="cart-list-item" *ngFor="let item of cart"> 
+                <img src="../../../assets/food-g2b5b789c3_1280.jpg" alt="">
+                <div class="details">
+                    <span style="font-weight: 600;">{{item.name}}</span>
+                    <span class="detail-item-price">{{item.selling}}</span>
                 </div>
-                <div class="row p-1">
-                    <p class="menu-desc p-0">{{item.description}}</p>
-                </div>
-                <div class="row" *ngIf="!item.cartQty || item.cartQty <= 0">
-                    <button class="btn btn-primary addCart" (click)="changeQty(item, 'add')">Add to cart</button>
-                </div>
-                <div class="cartQty" *ngIf="item.cartQty > 0">
+                <div class="detail-item-qty">
                     <button class="col" (click)="changeQty(item, 'add')">+</button>
                     <input type="text" class="col" [(ngModel)]="item.cartQty">
                     <button class="col" (click)="changeQty(item,'subtract')">-</button>
                 </div>
-            </div>
-            <!-- <div class="rating">
-                <i data-feather="heart"></i>
-                <img class="item-fav" src="../../../assets/star.svg" alt="fav">
-                <span>4</span>
-            </div> -->
-            <div class="discount">
-                <span>10%</span>
             </div>
         </div>
     </div>

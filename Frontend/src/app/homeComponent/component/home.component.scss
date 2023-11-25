@@ -11,7 +11,7 @@ $bg-color: #5C9DF2;
 .menu-card {
     position: relative;
     display: inline-block;
-    width: 13%;
+    width: 195px;
     height: 250px;
     border: 1px solid #9db7d8;
     border-radius: 15px;
@@ -110,7 +110,6 @@ $bg-color: #5C9DF2;
     border-radius: 20px;
     border: 1px solid $border-color;
     position: absolute;
-    font-size: 0.6rem;
     margin: auto;
     bottom: 2%;
     left:15%;
@@ -144,6 +143,10 @@ $bg-color: #5C9DF2;
     right: 1%;
     padding: 1%;
     z-index: 10;
+
+    i{
+        font-size: 1.75rem;
+    }
 }
 
 .cart {
@@ -173,6 +176,89 @@ $bg-color: #5C9DF2;
     }
 }
 
+.cart-item-desc{
+    border-left: 1px solid $border-color;
+    box-shadow: -5px 0px 20px 0px #86bbff;
+
+    .close-btn {
+        border-radius: 50%;
+        padding: 0.15rem 0.5rem;
+    }
+    .close-btn:hover{
+        border: 1px solid black;
+    }
+
+    i {
+        font-size: 1.75rem;
+    }
+
+    .cart-list{
+        height: 90%;
+        overflow-y: scroll;
+        .cart-list-item{
+            display: flex;
+            flex-direction: row;
+            padding: 2%;
+            border-bottom: 1px solid #c6c6c6;
+            
+            img{
+                width: 3rem;
+                height: 3rem;
+                border-radius: 50%;
+            }
+
+            .details{
+                display: flex;
+                flex-direction: column;
+                margin-left: 2%;
+            }
+
+            .detail-item-price{
+                color: grey;
+            }
+            .detail-item-qty{
+                width: 5rem;
+                height: 2rem;
+                display: flex;
+                flex-direction: row;
+                border-radius: 20px;
+                border: 1px solid $border-color;
+                font-size: 0.7rem;
+                margin-left: auto;
+                margin-right: 1%;
+                overflow: hidden;
+                font-weight: 500;
+
+                input[type=text]{
+                    width: 2rem;
+                    text-align: center;
+                    border-width: 0px 1px;
+                    outline: none;
+
+                    :focus {
+                        border-color: $border-color;
+                    }
+                }
+
+                button{
+                    border: none;
+                    background-color: #fff;
+                    padding: 0.3rem 0.5rem;
+                }
+                button:hover{
+                    color: white;
+                    background-color: #0d6efd;
+                }
+            }
+        }
+
+        .cart-list-item:last-child{
+            border-width: none;
+        }
+    }
+}
+
+// Custom Scrollbar
 ::-webkit-scrollbar {
     width: 10px;
     border-radius: 50%;

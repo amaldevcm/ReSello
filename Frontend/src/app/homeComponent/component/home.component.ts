@@ -13,7 +13,8 @@ export class HomeComponent implements OnInit,AfterViewInit{
     isAdmin: boolean = false;
     itemList = [];
     cart = [];
-    showCartItems = false;
+    showCartItems = true;
+    totalAmount = 0;
 
     constructor(private common: CommonService, private http: HttpClient) {
         this.isAdmin = this.common.isAdmin;
@@ -34,17 +35,20 @@ export class HomeComponent implements OnInit,AfterViewInit{
                 this.itemList = result['items'];
                 this.itemList = this.itemList.concat(this.itemList);
                 this.itemList.forEach(item => {
-                    item.cartQty = 0;
-                })
+                    item.cartQty = 1;
+                });
             }
+            this.changeQty(this.itemList[0], 2);
         });
     }
 
     changeQty(data, opr) {
         if(opr === "subtract") {
             data.cartQty -= 1;
+            this.totalAmount -= data.cartQty*data.selling;
         } else {
             data.cartQty += 1;
+            this.totalAmount += data.cartQty*data.selling;
         }
         this.cart = this.itemList.filter(data => data.cartQty !== 0);
         this.common.cart = this.cart;
