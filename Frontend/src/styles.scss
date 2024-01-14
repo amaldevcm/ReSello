@@ -2,6 +2,8 @@
 @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 @import "../node_modules/bootstrap-icons/font/bootstrap-icons.css";
 
+$bg-color: #4093ff;
+
 html, body { 
     height: 100%; 
 }
@@ -14,6 +16,8 @@ body {
     width: 100%;
     display: flex;
     flex-direction: column;
+    margin-top: 1%;
+    margin-right: 0%;
 
     .inv-container-header{
         text-align: start;
@@ -35,9 +39,16 @@ body {
     margin-top: 1%;
 
     th {
-        background-color: #6cbaff;
+        background-color: $bg-color;
         padding: 1% 2%;
+        color: #fff;
+        font-size: 1rem;
+        font-weight: 500;
     }
+
+    // th:first-child{
+    //     border-top-left-radius: 1rem;
+    // }
 
     td {
         padding: 1% 2%;
@@ -45,8 +56,22 @@ body {
 }
 
 .inv-detail-container {
-    width: 50%;
-    margin: 0% 2%;
+    // width: 50%;
+    margin: 0% 6%;
+    font-size: 0.85rem;
+
+    .img-view {
+        // margin-right: 1rem;
+        width: 15rem;
+        height: 10rem;
+        border-radius: 1rem;
+        border: 1px solid grey;
+        fill-rule: evenodd;
+    }
+
+    .strong {
+        font-weight: 700;
+    }
 }
 
 .save-btn {
@@ -65,7 +90,7 @@ body {
 
 .switch {
     position: relative;
-    width: 14%;
+    width: 16%;
     height: 28px;
 
     .slider {
@@ -74,10 +99,10 @@ body {
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: #c6c6c6;
         border-radius: 20px;
         font-size: 1rem;
         padding-left: 0.5rem;
+        background-color: #bbbbbb;
     }
     .slider::before {
         position: absolute;
@@ -91,7 +116,7 @@ body {
         border-radius: 50%;
         transition: 0.4s;
         -webkit-transition: 0.4s;
-        box-shadow: inset 0px 0px 4px 0px dimgrey;
+        box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.2);
     }
 
     

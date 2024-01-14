@@ -1,5 +1,5 @@
 $border-color: #1E6FD9;
-$bg-color: #5C9DF2;
+$bg-color: #4093ff;
 
 .menuitems {
     display: flex;
@@ -11,7 +11,7 @@ $bg-color: #5C9DF2;
 .menu-card {
     position: relative;
     display: inline-block;
-    width: 195px;
+    width: 190px;
     height: 250px;
     border: 1px solid #9db7d8;
     border-radius: 15px;
@@ -33,8 +33,8 @@ $bg-color: #5C9DF2;
 
     img:not(.item-fav) {
         width: 100%;
-        height: 70%;
-        object-fit: fill;
+        height: 8.5rem;
+        object-fit: cover;
     }
 
     .menu-title{
@@ -120,7 +120,8 @@ $bg-color: #5C9DF2;
     button{
         border: none;
         background-color: #fff;
-        padding: 0.3rem 0.5rem;
+        // padding: 0.3rem 0.5rem;
+        font-size: 0.9rem;
     }
     button:hover{
         color: white;
@@ -144,6 +145,15 @@ $bg-color: #5C9DF2;
     padding: 1%;
     z-index: 10;
 
+    button{    
+        background-color: white;
+        border-radius: 50%;
+        border: 1px solid $border-color;
+    }
+    button:hover{
+        box-shadow: 0px 0px 5px solid $bg-color;
+    }
+
     i{
         font-size: 1.75rem;
     }
@@ -155,7 +165,7 @@ $bg-color: #5C9DF2;
     bottom: 10%;
     width: 25%;
     max-height: 200px;
-    overflow-y: scroll;
+    overflow-y: auto;
     border: 1px solid grey;
     background-color: white;
     z-index: 2;
@@ -177,8 +187,8 @@ $bg-color: #5C9DF2;
 }
 
 .cart-item-desc{
-    border-left: 1px solid $border-color;
-    box-shadow: -5px 0px 20px 0px #86bbff;
+    border-left: 1px solid #a5ccff;
+    box-shadow: -10px 0px 16px 0px #bfdbff; 
 
     .close-btn {
         border-radius: 50%;
@@ -193,8 +203,9 @@ $bg-color: #5C9DF2;
     }
 
     .cart-list{
-        height: 90%;
+        height: 80dvh;
         overflow-y: scroll;
+
         .cart-list-item{
             display: flex;
             flex-direction: row;
@@ -214,7 +225,12 @@ $bg-color: #5C9DF2;
             }
 
             .detail-item-price{
+                font-size: 0.75rem;
                 color: grey;
+
+                i{
+                    font-size: inherit;
+                }
             }
             .detail-item-qty{
                 width: 5rem;
@@ -234,6 +250,7 @@ $bg-color: #5C9DF2;
                     text-align: center;
                     border-width: 0px 1px;
                     outline: none;
+                    border-color: $border-color;
 
                     :focus {
                         border-color: $border-color;
@@ -242,12 +259,9 @@ $bg-color: #5C9DF2;
 
                 button{
                     border: none;
-                    background-color: #fff;
-                    padding: 0.3rem 0.5rem;
-                }
-                button:hover{
                     color: white;
                     background-color: #0d6efd;
+                    padding: 0.3rem 0.5rem;
                 }
             }
         }
@@ -279,4 +293,37 @@ $bg-color: #5C9DF2;
   ::-webkit-scrollbar-thumb:hover {
     background: #555;
     border-radius: 25px;
+  }
+
+  .item-detail {
+    .product-img{
+        display: flex;
+        justify-content: center;
+        img {
+            width: 12rem;
+            height: 12rem;
+            border-radius: 50%;
+            box-shadow: 0px 0px 15px #4e5a69;
+            border: 1px solid #fff;
+            object-fit: cover;
+        }
+    }
+
+    .product-title-price{
+        font-size: 1.25rem;
+        margin-top: 1.25rem;
+        .price{
+            text-align: end;
+            color: grey;
+
+            i {
+                font-size: inherit;
+            }
+        }
+    }
+
+    .product-desc {
+        font-size: 0.85rem;
+        word-wrap: break-word;
+    }
   }

@@ -1,46 +1,71 @@
 <div class="inv-table-container">
-    <p class="inv-container-header">{{isEdited? 'Update User':'New User'}}</p>
+    <p class="inv-container-header">{{isEdited? 'Update Item':'New Item'}}</p>
     <hr>
 
     <form autocomplete="off" [formGroup]="itemForm">
         <div class="inv-detail-container row">
-            <div class="row my-1">
-                <label for="itemName" class="col-md-4">Name</label>
-                <input class="col-md form-control" type="text" name="itemName" id="itemName" [(ngModel)]="data.name" formControlName="name">
-            </div>
-            <div class="row my-1">
-                <label for="itemType" class="col-md-4">Item type</label>
-                <!-- <input class="col-md form-control" type="text" name="type" id="type" [(ngModel)]="data.type" formControlName="type"> -->
-                <select class="col-md form-select" name="itemType" id="itemType" [(ngModel)]="data.type" formControlName="type">
-                    <option value="Veg">Vegitarian</option>
-                    <option value="NonVeg">Non-Vegitarian</option>
-                    <option value="dessert">Dessert</option>
-                </select>
-            </div>
-            <div class="row my-1">
-                <label for="desc" class="col-md-4">Description</label>
-                <textarea class="col-md form-control" type="text" name="desc" id="desc" formControlName="description" [(ngModel)]="data.description"></textarea>
-            </div>
-            <div class="row my-1">
-                <label for="cost" class="col-md-4">Cost</label>
-                <input class="col-md form-control" type="text" name="cost" id="cost" [(ngModel)]="data.cost" formControlName="cost">
-            </div>
-            <div class="row my-1">
-                <label for="selling" class="col-md-4">Selling</label>
-                <input class="col-md form-control" type="text" name="selling" id="selling" formControlName="selling" [(ngModel)]="data.selling">
-            </div>
-            <div class="row my-1">
-                <label for="image" class="col-md-4">Image</label>
-                <input class="col-md form-control" type="file" name="image" id="image" [(ngModel)]="data.image" formControlName="image">
-            </div>
-            <div class="row my-1" *ngIf="isEdited">
-                <label class="col-md-4">Status</label>
-                <label for="status" class="switch">
-                    <input type="checkbox" name="status" id="status" [(ngModel)]="data.status" formControlName="status">
-                    <span class="slider" data-label-on="Active" data-label-off="Inactive"></span>
-                </label>
-            </div>
+            <div class="row">
 
+                <!-- Left side -->
+                <div class="col">
+                    <div class="row my-1">
+                        <label for="itemName" class="col-md-4 strong">Name</label>
+                        <input class="col-md form-control" type="text" name="itemName" id="itemName" [(ngModel)]="data.name" formControlName="name">
+                    </div>
+                    <div class="row my-1">
+                        <label for="itemType" class="col-md-4 strong">Item type</label>
+                        <!-- <input class="col-md form-control" type="text" name="type" id="type" [(ngModel)]="data.type" formControlName="type"> -->
+                        <select class="col-md form-select" name="itemType" id="itemType" [(ngModel)]="data.type" formControlName="type">
+                            <option value="Veg">Vegitarian</option>
+                            <option value="NonVeg">Non-Vegitarian</option>
+                            <option value="dessert">Dessert</option>
+                        </select>
+                    </div>
+                    <div class="row my-1">
+                        <label for="desc" class="col-md-4">Description</label>
+                        <textarea class="col-md form-control" type="text" name="desc" id="desc" formControlName="description" [(ngModel)]="data.description"></textarea>
+                    </div>
+                    <div class="row my-1">
+                        <label for="cost" class="col-md-4 strong">Cost</label>
+                        <div class="price col-md">        
+                            <i class="bi bi-currency-rupee"></i>
+                            <input class="form-control" type="text" name="cost" id="cost" [(ngModel)]="data.cost" formControlName="cost">
+                        </div>
+                    </div>
+                    <div class="row my-1">
+                        <label for="selling" class="col-md-4 strong">Selling</label>
+                        <div class="price col-md">
+                            <i class="bi bi-currency-rupee"></i>
+                            <input class="form-control" type="text" name="selling" id="selling" formControlName="selling" [(ngModel)]="data.selling">
+                            <!-- <span class=""></span> -->
+                        </div>
+                    </div>
+                    <div class="row my-1">
+                        <label for="selling" class="col-md-4">Discount</label>
+                        <div class="discount col-md">
+                            <input class="form-control" type="text" name="discount" id="discount" formControlName="discount" [(ngModel)]="data.discount">
+                            <i class="bi bi-percent"></i>
+                        </div>
+                    </div>
+                    <div class="row my-1">
+                        <label for="image" class="col-md-4">Image</label>
+                        <input class="col-md form-control" type="file" name="image" id="image" [(ngModel)]="data.image" formControlName="image">
+                    </div>
+                    <div class="row my-1" *ngIf="isEdited">
+                        <label class="col-md-4">Status</label>
+                        <label for="status" class="switch">
+                            <input type="checkbox" name="status" id="status" [(ngModel)]="data.status" formControlName="status">
+                            <span class="slider" data-label-on="Active" data-label-off="Inactive"></span>
+                        </label>
+                    </div>        
+                </div>
+
+                <!-- Right side -->
+                <div class="col">
+                    <img class="img-view mx-4" src="../../../assets/No-Image-Placeholder.svg" alt="">
+                </div>
+            </div>
+            
 
             <div class="row">
                 <button class="btn btn-primary save-btn" (click)="saveItem()">Save</button>

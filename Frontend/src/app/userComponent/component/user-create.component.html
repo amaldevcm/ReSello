@@ -4,38 +4,44 @@
 
     <form autocomplete="off" [formGroup]="userForm">
         <div class="inv-detail-container row">
-            <div class="row my-1">
-                <label for="userName" class="col-4">Name</label>
-                <input class="col-md form-control" type="text" name="userName" id="userName" [(ngModel)]="data.name" formControlName="name">
+            <div class="row">
+                <div class="col">
+                    <div class="row my-1">
+                        <label for="userName" class="col-4 strong">Name</label>
+                        <input class="col-md form-control" type="text" name="userName" id="userName" [(ngModel)]="data.name" formControlName="name">
+                    </div>
+                    <div class="row my-1">
+                        <label for="mobile" class="col-4 strong">Mobile Number</label>
+                        <input class="col-md form-control" type="text" name="mobile" id="mobile" [(ngModel)]="data.mobile" formControlName="mobile">
+                    </div>
+                    <div class="row my-1">
+                        <label for="email" class="col-4 strong">E-mail</label>
+                        <input class="col-md form-control" type="text" name="email" id="email" [(ngModel)]="data.email" formControlName="email">
+                    </div>
+                    <div class="row my-1">
+                        <label for="address" class="col-4">Address</label>
+                        <textarea class="col-md form-control" type="textArea" name="address" id="address" rows="3" formControlName="address" 
+                            [(ngModel)]="data.address"></textarea>
+                    </div>
+                    <div class="row my-1" *ngIf="!isEdited">
+                        <label for="password" class="col-4 strong">Password</label>
+                        <input class="col-md form-control" type="password" name="password" id="passwword" [(ngModel)]="data.password" formControlName="password">
+                    </div>
+                    <div class="row my-1" *ngIf="!isEdited">
+                        <label for="confirmPass" class="col-4 strong">Confirm Password</label>
+                        <input class="col-md form-control" type="password" name="confirmPass" id="confirmPass" [(ngModel)]="data.confirmPass" formControlName="confirmPass">
+                    </div>
+                    <div class="row my-1" *ngIf="isEdited">
+                        <label class="col-4">Status</label>
+                        <label for="status" class="switch">
+                            <input type="checkbox" name="status" id="status" [(ngModel)]="data.status" formControlName="status">
+                            <span class="slider" data-label-on="Active" data-label-off="Inactive"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col"></div>
             </div>
-            <div class="row my-1">
-                <label for="mobile" class="col-4">Mobile Number</label>
-                <input class="col-md form-control" type="text" name="mobile" id="mobile" [(ngModel)]="data.mobile" formControlName="mobile">
-            </div>
-            <div class="row my-1">
-                <label for="email" class="col-4">E-mail</label>
-                <input class="col-md form-control" type="text" name="email" id="email" [(ngModel)]="data.email" formControlName="email">
-            </div>
-            <div class="row my-1">
-                <label for="address" class="col-4">Address</label>
-                <textarea class="col-md form-control" type="textArea" name="address" id="address" rows="3" formControlName="address" 
-                    [(ngModel)]="data.address"></textarea>
-            </div>
-            <div class="row my-1" *ngIf="!isEdited">
-                <label for="password" class="col-4">Password</label>
-                <input class="col-md form-control" type="password" name="password" id="passwword" [(ngModel)]="data.password" formControlName="password">
-            </div>
-            <div class="row my-1" *ngIf="!isEdited">
-                <label for="confirmPass" class="col-4">Confirm Password</label>
-                <input class="col-md form-control" type="password" name="confirmPass" id="confirmPass" [(ngModel)]="data.confirmPass" formControlName="confirmPass">
-            </div>
-            <div class="row my-1" *ngIf="isEdited">
-                <label class="col-4">Status</label>
-                <label for="status" class="switch">
-                    <input type="checkbox" name="status" id="status" [(ngModel)]="data.status" formControlName="status">
-                    <span class="slider" data-label-on="Active" data-label-off="Inactive"></span>
-                </label>
-            </div>
+            
 
 
             <div class="row">

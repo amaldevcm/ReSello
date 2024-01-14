@@ -13,8 +13,10 @@ export class HomeComponent implements OnInit,AfterViewInit{
     isAdmin: boolean = false;
     itemList = [];
     cart = [];
-    showCartItems = true;
+    showCartItems = false;
     totalAmount = 0;
+    showItemDetails = true;
+    selectedItem = {}
 
     constructor(private common: CommonService, private http: HttpClient) {
         this.isAdmin = this.common.isAdmin;
@@ -32,30 +34,50 @@ export class HomeComponent implements OnInit,AfterViewInit{
     getItemList() {
         this.http.get("http://localhost:3000/api/items").subscribe(result => {
             if(result && result !== undefined) {
-                this.itemList = result['items'];
-                this.itemList = this.itemList.concat(this.itemList);
-                this.itemList.forEach(item => {
-                    item.cartQty = 1;
+                result['items'].forEach(item =>{
+                    item.discountPrice = item.selling - (item.selling*item.discount)/100;
                 });
+                this.itemList = JSON.parse(JSON.stringify(result['items']));
+                this.itemList = this.itemList.concat(result['items']);
+                this.itemList.forEach(item => {
+                    item.cartQty = 0;
+                });
+                this.selectedItem = this.itemList[0];
             }
-            this.changeQty(this.itemList[0], 2);
         });
     }
 
     changeQty(data, opr) {
+        data.cartQty = Number(data.cartQty);
         if(opr === "subtract") {
             data.cartQty -= 1;
-            this.totalAmount -= data.cartQty*data.selling;
         } else {
             data.cartQty += 1;
-            this.totalAmount += data.cartQty*data.selling;
         }
-        this.cart = this.itemList.filter(data => data.cartQty !== 0);
-        this.common.cart = this.cart;
+        this.calculateTotalAmount();
     }
 
-    toggleCartItems(){
-        this.showCartItems = !this.showCartItems;
+    calculateTotalAmount() {
+        this.totalAmount = 0;
+        this.cart = this.itemList.filter(data => data.cartQty > 0);
+        this.common.cart = this.cart;
+        this.cart.forEach(item => {
+            this.totalAmount += Number(item.cartQty)*Number(item.discountPrice);
+        });
+    }
+
+    toggleCartItems(calledFrom = 'close', data=null){
+        if(calledFrom === 'close'){
+            this.showItemDetails = false;
+            this.showCartItems = false;
+        } else if(calledFrom === 'item') {
+            this.showItemDetails = true;
+            this.showCartItems = false;
+        } else {
+            this.showItemDetails = false;
+            this.showCartItems = !this.showCartItems;
+        }
+        this.selectedItem = data;
     }
 }
 

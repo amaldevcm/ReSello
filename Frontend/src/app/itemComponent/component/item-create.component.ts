@@ -17,7 +17,8 @@ export class ItemCreateComponent implements OnInit {
         selling: null,
         image: null,
         status: null,
-        description: null
+        description: null,
+        discount: null
     };
     @Input() isEdited = false;
     @Output() output = new EventEmitter<any>();
@@ -31,7 +32,8 @@ export class ItemCreateComponent implements OnInit {
             selling: new FormControl('',Validators.required),
             image: new FormControl('',Validators.required),
             status: new FormControl(''),
-            description: new FormControl('')
+            description: new FormControl(''),
+            discount: new FormControl('')
         })
     }
 
@@ -50,6 +52,7 @@ export class ItemCreateComponent implements OnInit {
             selling: this.data.selling,
             image: this.data.image,
             description: this.data.description,
+            discount: this.data.discount,
             status: this.data.status? 'Active': 'Inactive',
         }
 

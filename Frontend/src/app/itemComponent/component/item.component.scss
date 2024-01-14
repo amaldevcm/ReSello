@@ -18,3 +18,31 @@
         
     }
 }
+
+.price {
+    position: relative;
+    padding: 0;
+    i {
+        top: 25%;
+        left: 1%;
+        position: absolute;
+    }
+
+    input {
+        padding-left: 1.25rem;
+    }
+}
+
+.discount {
+    position: relative;
+    padding: 0;
+    i {
+        top: 25%;
+        right: 2%;
+        position: absolute;
+    }
+
+    input {
+        padding-left: 1.25rem;
+    }
+}
