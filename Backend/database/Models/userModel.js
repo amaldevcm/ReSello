@@ -13,7 +13,12 @@ const userSchema = new mongoose.Schema({
         default: 'Active'
     },
     createdDate: String,
-    updatedDate: String
+    updatedDate: String,
+    role: {
+        type: 'string',
+        default: 'user',
+        required: false
+    }
 });
 
 const user = new mongoose.model('User', userSchema);
