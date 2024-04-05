@@ -30,7 +30,7 @@ export class ItemCreateComponent implements OnInit {
             type: new FormControl('',Validators.required),
             cost: new FormControl('',Validators.required),
             selling: new FormControl('',Validators.required),
-            image: new FormControl('',Validators.required),
+            image: new FormControl(''),
             status: new FormControl(''),
             description: new FormControl(''),
             discount: new FormControl('')

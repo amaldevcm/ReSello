@@ -1,25 +1,31 @@
 $border-color: #1E6FD9;
 $bg-color: #4093ff;
+$bg-neutral: #FFF;
 
 .menuitems {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    // flex-wrap: wrap;
+    justify-content: space-between;
     position: relative;
+    overflow-y: auto;
 }
 
-.menu-card {
+.card {
     position: relative;
     display: inline-block;
-    width: 190px;
-    height: 250px;
-    border: 1px solid #9db7d8;
+    width: 14rem;
+    height: 18rem;
+    color: #fff;
     border-radius: 15px;
     overflow: hidden;
     margin-right: 1%;
     margin-bottom: 1%;
-    background-color: #fff;
-    flex-grow: 1;
+    background-color: $bg-neutral;
+    background-color: #1111117d;
+    box-shadow: 0px 0px 6px #ffffff75;
+    border: 1px solid #a3a3a3;
+    padding: 1rem;
 
     .menu-body {
         width: 100%;
@@ -33,8 +39,8 @@ $bg-color: #4093ff;
 
     img:not(.item-fav) {
         width: 100%;
-        height: 8.5rem;
-        object-fit: cover;
+        height: 11rem;
+        // object-fit: cover;
     }
 
     .menu-title{
@@ -75,13 +81,14 @@ $bg-color: #4093ff;
 
 .discount{
     position: absolute;
-    top: 1%;
+    top: 2%;
     left: 2%;
     background-color: red;
     color: white;
-    border-radius: 45%;
-    padding: 1% 2%;
+    border-radius: 1rem;
+    padding: 0.25rem 0.5rem;
     z-index: 10;
+    font-size: 0.85rem;
 }
 
 // .menu-card:hover {
@@ -187,8 +194,10 @@ $bg-color: #4093ff;
 }
 
 .cart-item-desc{
-    border-left: 1px solid #a5ccff;
-    box-shadow: -10px 0px 16px 0px #bfdbff; 
+    // border-left: 1px solid #a5ccff;
+    // box-shadow: -10px 0px 16px 0px #bfdbff;
+    width: 100%;
+    height: 90dvh;
 
     .close-btn {
         border-radius: 50%;
@@ -203,7 +212,7 @@ $bg-color: #4093ff;
     }
 
     .cart-list{
-        height: 80dvh;
+        height: 100dvh;
         overflow-y: scroll;
 
         .cart-list-item{
@@ -272,30 +281,7 @@ $bg-color: #4093ff;
     }
 }
 
-// Custom Scrollbar
-::-webkit-scrollbar {
-    width: 10px;
-    border-radius: 50%;
-}
-/* Track */
-::-webkit-scrollbar-track {
-    background: #f1f1f1; 
-    border-radius: 25px;
-  }
-   
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 25px;
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #555;
-    border-radius: 25px;
-  }
-
-  .item-detail {
+.item-detail {
     .product-img{
         display: flex;
         justify-content: center;

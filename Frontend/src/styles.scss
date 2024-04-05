@@ -3,13 +3,17 @@
 @import "../node_modules/bootstrap-icons/font/bootstrap-icons.css";
 
 $bg-color: #4093ff;
+$bg-color-2: #5C9DF2;
+$ff-color: white;
+$bg-neutral: white;
 
-html, body { 
-    height: 100%; 
-}
-body { 
-    margin: 0; 
+body {
+    height: 100svh;
+    overflow: hidden;
     font-family: Roboto, "Helvetica Neue", sans-serif; 
+    // background-color: $bg-color;
+    background-color: $bg-neutral;
+    // background-image: linear-gradient(45deg, black, transparent);
 }
 
 .inv-table-container {
@@ -24,11 +28,17 @@ body {
         font-size: 1.3rem;
         font-weight: 700;
         margin-bottom: 0;
+        color: $ff-color;
     }
 
     .btn {
         font-size: 0.8rem;
     }
+}
+
+hr {
+    font-size: 2px;
+    color: $bg-neutral;
 }
 
 .inv-table {
@@ -37,11 +47,12 @@ body {
     align-self: center;
     border: 1px solid #c6c6c6;
     margin-top: 1%;
+    background-color: $bg-neutral;
 
     th {
         background-color: $bg-color;
         padding: 1% 2%;
-        color: #fff;
+        color: $ff-color;
         font-size: 1rem;
         font-weight: 500;
     }
@@ -67,6 +78,10 @@ body {
         border-radius: 1rem;
         border: 1px solid grey;
         fill-rule: evenodd;
+    }
+
+    input, textarea {
+        font-size: 0.85rem;
     }
 
     .strong {
@@ -158,9 +173,27 @@ body {
     .page-link {
         font-size: 13px;
     }
-
-    // .page-link:first {
-    //     background-color: #2196F3;
-    //     color: white;
-    // }
 }
+
+// Custom Scrollbar
+::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 50%;
+}
+/* Track */
+::-webkit-scrollbar-track {
+    background: #fff; 
+    border-radius: 25px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 25px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    border-radius: 25px;
+  }

@@ -25,17 +25,21 @@
 
     .nav-btns {
         width: 40%;
-    li {
-        width: fit-content;
-        display: inline;
-        margin-left: 2%;
 
-        button {
-            color: #fff;
-            font-weight: 500;
+        li {
+            width: fit-content;
+            display: inline;
+            margin-left: 2%;
 
+            button {
+                color: #fff;
+                font-weight: 500;
+            }
+
+            button:hover {
+                border-bottom: 2px solid white;
+            }
         }
-    }
 }
 
     .search-ele {
