@@ -1,0 +1,107 @@
+<div [hidden]="isAdmin" class="py-2">
+    <!-- Customer Page -->
+    <div class="row">
+        <img class="bg-img" src="../assets/laptop-acer.png" alt="">
+        <div class=""></div>
+    </div>
+</div>
+
+<div class="row m-0" *ngIf="!showCartItems && !showItemDetails">
+    <div [hidden]="!isAdmin" class="p-3 col" style="position: relative; height: 90dvh;">
+
+        <!-- Cart icon button -->
+        <div class="cart-icon" [hidden]="showCartItems">
+            <button type="button" class="btn position-relative" (click)="toggleCartItems('cart')">
+                <i class="bi bi-cart3"></i>
+                <span class="position-absolute top-0 start-100 translate-middle badge bg-danger" *ngIf="cart.length !== 0 && !showCartItems"> {{ cart.length }} </span>
+            </button>
+        </div>
+        
+
+        <div class="menuItems">
+            <div class="card" *ngFor="let item of itemList">
+                <div class="menu-header"  (click)="toggleCartItems('item', item)">
+                    <img src="../assets/laptop-acer.png" alt="">
+                </div>
+                <div class="container"  (click)="toggleCartItems('item', item)">
+                    <div class="row p-1">
+                        <span class="col menu-title p-0">{{item.name}}</span>
+                        <span class="col-4 menu-price p-0"><i class="bi bi-currency-rupee"></i>{{item.selling}}</span>
+                    </div>
+                    <div class="row p-1">
+                        <p class="menu-desc p-0">{{item.description}}</p>
+                    </div>
+                    <div class="row" *ngIf="!item.cartQty || item.cartQty <= 0">
+                        <button class="btn btn-primary addCart" (click)="changeQty(item, 'add')">Add to cart</button>
+                    </div>
+                </div>
+                <div class="menu-footer">
+                    <div class="cartQty" *ngIf="item.cartQty > 0">
+                        <button class="col" (click)="changeQty(item,'subtract')"><i class="bi bi-dash"></i></button>
+                        <input type="text" class="col" [(ngModel)]="item.cartQty" (ngModelChange)="calculateTotalAmount()">
+                        <button class="col" (click)="changeQty(item, 'add')"><i class="bi bi-plus"></i></button>
+                    </div>
+                </div>
+                <div class="discount" *ngIf="item.discount !== 0">
+                    <span>{{item.discount}}%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Cart and item details side panel -->
+<div class="cart-item-desc p-1" *ngIf="showCartItems || showItemDetails">
+    <!-- Total cart price indicator -->
+    <div style="display: flex; justify-content: space-between;">
+        <button class="btn close-btn" (click)="toggleCartItems('close')"><i class="bi bi-arrow-left"></i></button>
+        <div style="display: flex; align-items: center;" [hidden]="showItemDetails">
+            <b>Total:</b>  <span><i class="bi bi-currency-rupee" style="font-size: 1rem;"></i>{{totalAmount}}</span>
+        </div>
+    </div>
+
+    <!-- Cart items panel -->
+    <div class="cart-list" *ngIf="showCartItems">
+        <div class="cart-list-item" *ngFor="let item of cart"> 
+            <img src="../../../assets/No-Image-Placeholder.svg" alt="">
+            <div class="details">
+                <span style="font-weight: 600;">{{item.name}}</span>
+                <span class="detail-item-price"><i class="bi bi-currency-rupee"></i>{{item.discountPrice}}</span>
+            </div>
+            <div class="detail-item-qty">
+                <button class="col" (click)="changeQty(item, 'add')">+</button>
+                <input type="text" class="col" [(ngModel)]="item.cartQty" (ngModelChange)="calculateTotalAmount()">
+                <button class="col" (click)="changeQty(item,'subtract')">-</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Item details panel -->
+    <div class="item-detail" *ngIf="showItemDetails">
+        <!-- product image -->
+        <div class="product-img">
+            <img src="../assets/laptop-acer.png" alt="No image to show">
+        </div>
+
+        <!-- product details -->
+        <div class="row product-title-price">
+            <b class="col">{{selectedItem.name}}</b>
+            <span class="col price">
+                <!-- discounted price -->
+                <span *ngIf="selectedItem.discount !== 0">
+                    <i class="bi bi-currency-rupee"></i>{{selectedItem.discountPrice}}
+                    <s><i class="bi bi-currency-rupee"></i>{{selectedItem.selling}}</s>
+                </span>
+                <!-- Normal price -->
+                <span *ngIf="selectedItem.discount == 0"><i class="bi bi-currency-rupee"></i>{{selectedItem.selling}}</span>
+            </span>
+        </div>
+        <div class="row my-1" *ngIf="selectedItem.description">
+            <span class="product-desc">{{selectedItem.description}}.</span>
+        </div>
+        <div class="row">
+            
+        </div>
+    </div>
+</div>

@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, OnInit } from "@angular/core";
 import { CommonService } from "../../common.service";
 import { HttpClient } from "@angular/common/http";
-import * as feather from 'feather-icons';
 
 @Component({
     selector: 'app-home',
@@ -9,7 +8,7 @@ import * as feather from 'feather-icons';
     styleUrls: ['./home.component.scss'],
 })
 
-export class HomeComponent implements OnInit,AfterViewInit{
+export class HomeComponent implements OnInit{
     isAdmin: boolean = false;
     itemList = [];
     cart = [];
@@ -25,10 +24,6 @@ export class HomeComponent implements OnInit,AfterViewInit{
 
     ngOnInit(): void {
         this.getItemList();
-    }
-
-    ngAfterViewInit(): void {
-        feather.replace();         
     }
 
     getItemList() {
@@ -78,6 +73,14 @@ export class HomeComponent implements OnInit,AfterViewInit{
             this.showCartItems = !this.showCartItems;
         }
         this.selectedItem = data;
+    }
+
+    toggleItemDetails(itemData) {
+        this.showItemDetails = true;
+    }
+
+    btnClick(){
+        console.log('called')
     }
 }
 

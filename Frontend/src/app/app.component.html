@@ -1,5 +1,4 @@
-<div class="top-nav px-2">
-  <!-- <span class="col-5">K-Ready Cafe</span> -->
+<!-- <div class="top-nav px-2">
   <span class="logo">Shop Go</span>
   <div class="nav-btns">
     <ul type="none">
@@ -8,13 +7,24 @@
       <li><button class="btn" routerLink="/item" routerLinkActive="false">Items</button></li>
     </ul>
   </div>
-  <!-- <div class="search-ele row">
-    <input type="text" class="col-sm p-0">
-    <i data-feather="search" class="col-sm-1 p-0"></i>
-  </div> -->
   <img class="profile_pic" src="../assets/profile_pic.jpg" alt="">
 </div>
 
 <div class="row mx-0">
   <router-outlet></router-outlet> 
+</div> -->
+
+
+<div class="bg-white flex justify-stretch px-3 h-16 border-gray-200 border-b-2 shadow">
+  <!-- <img src="../assets/ElectroCart.png" alt="your company" class="h-10 w-10 rounded-full"> -->
+  <img src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your company" class="w-8">
+  <div class="flex px-3 menu-options">
+    <button class="text-black-300 hover:border-gray-300 border-transparent focus:outline-none border-b-2 px-3 py-2 text-sm font-medium"  routerLink="/" routerLinkActive="true">Home</button>
+    <button class="text-black-300 hover:border-gray-300 border-transparent focus:outline-none border-b-2 px-3 py-2 text-sm font-medium" routerLink="/user" routerLinkActive="false">Users</button>
+    <button class="text-black-300 hover:border-gray-300 border-transparent focus:outline-none border-b-2 px-3 py-2 text-sm font-medium" routerLink="/item" routerLinkActive="false">Items</button>
+  </div>
+</div>
+
+<div class="relative overflow-y-auto size-full bg-white">
+  <router-outlet></router-outlet>
 </div>

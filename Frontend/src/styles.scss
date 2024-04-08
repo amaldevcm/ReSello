@@ -2,6 +2,10 @@
 @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 @import "../node_modules/bootstrap-icons/font/bootstrap-icons.css";
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 $bg-color: #4093ff;
 $bg-color-2: #5C9DF2;
 $ff-color: white;
@@ -12,7 +16,7 @@ body {
     overflow: hidden;
     font-family: Roboto, "Helvetica Neue", sans-serif; 
     // background-color: $bg-color;
-    background-color: $bg-neutral;
+    // background-color: $bg-neutral;
     // background-image: linear-gradient(45deg, black, transparent);
 }
 
@@ -42,11 +46,10 @@ hr {
 }
 
 .inv-table {
-    width: 70%;
+    width: 85%;
     font-size: 0.8rem;
     align-self: center;
-    border: 1px solid #c6c6c6;
-    margin-top: 1%;
+    margin-top: 2rem;
     background-color: $bg-neutral;
 
     th {
@@ -57,12 +60,20 @@ hr {
         font-weight: 500;
     }
 
-    // th:first-child{
-    //     border-top-left-radius: 1rem;
-    // }
-
     td {
         padding: 1% 2%;
+    }
+
+    tr{ border: 1px solid #c6c6c6; }
+    tr:first-child{ 
+        border: none;
+        border-top-right-radius: 0.4rem;
+        border-top-left-radius: 0.4rem; 
+    }
+    tr:last-child{ 
+        border-bottom: 1px solid #c6c6c6; 
+        border-bottom-right-radius: 0.4rem;
+        border-bottom-left-radius: 0.4rem;
     }
 }
 

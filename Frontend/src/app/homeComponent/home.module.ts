@@ -5,10 +5,12 @@ import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { CommonService } from "../common.service";
 import { HomeRouterModule } from "./home-routing.module";
+import { ItemDetails } from "./component/item-details.component";
 
 @NgModule({
     declarations: [
-        HomeComponent
+        HomeComponent,
+        ItemDetails
     ],
     imports: [
         CommonModule,
