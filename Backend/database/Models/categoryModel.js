@@ -6,6 +6,7 @@ const categoryModel = new mongoose.Schema({
         type: string,
         required: true
     },
+    defaultImg: string,
     status: boolean
 })
 
