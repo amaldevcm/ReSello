@@ -18,7 +18,8 @@ export class ItemCreateComponent implements OnInit {
         image: null,
         status: null,
         description: null,
-        discount: null
+        discount: null,
+
     };
     @Input() isEdited = false;
     @Output() output = new EventEmitter<any>();
@@ -82,6 +83,13 @@ export class ItemCreateComponent implements OnInit {
             this.output.emit();
         } else {
             window.history.back();
+        }
+    }
+
+    setImage(event, callFrom) {
+        let url = URL.createObjectURL(event.target.files[0]);
+        if(callFrom === 'baseImage') {
+            this.data.image = url;
         }
     }
 }

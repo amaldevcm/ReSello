@@ -116,8 +116,12 @@ hr {
 
 .switch {
     position: relative;
-    width: 16%;
+    width: 6rem;
     height: 28px;
+
+    input{
+        display: none;
+    }
 
     .slider {
         position: absolute;
@@ -130,6 +134,7 @@ hr {
         padding-left: 0.5rem;
         background-color: #bbbbbb;
     }
+
     .slider::before {
         position: absolute;
         content: "";
@@ -153,9 +158,9 @@ hr {
         box-shadow: 0 0 1px #2196F3;
     }
     input:checked + .slider:before {
-        -webkit-transform: translateX(72px);
-        -ms-transform: translateX(72px);
-        transform: translateX(72px);
+        -webkit-transform: translateX(4.2rem);
+        -ms-transform: translateX(4.2rem);
+        transform: translateX(4.2rem);
     }
 
     input:checked + .slider::after {
@@ -207,4 +212,12 @@ hr {
   ::-webkit-scrollbar-thumb:hover {
     background: #555;
     border-radius: 25px;
+  }
+
+
+
+  .inv-container{
+    input:focus , textarea:focus{
+        outline: none;
+    }   
   }

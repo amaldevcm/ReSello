@@ -14,8 +14,23 @@ export class HomeComponent implements OnInit{
     cart = [];
     showCartItems = false;
     totalAmount = 0;
-    showItemDetails = true;
-    selectedItem = {}
+    showItemDetails = false;
+    selectedItem = {
+        name: 'lorem3',
+        description: 'lorem30',
+        selling: 2000,
+        colors: [
+            {
+                color: '#111',
+                colorName: 'Glossy white',
+                images: [
+                    'https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg',
+                    'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg',
+                    'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-02.jpg'
+                ]
+            }
+        ]
+    }
 
     constructor(private common: CommonService, private http: HttpClient) {
         this.isAdmin = this.common.isAdmin;
@@ -75,8 +90,9 @@ export class HomeComponent implements OnInit{
         this.selectedItem = data;
     }
 
-    toggleItemDetails(itemData) {
-        this.showItemDetails = true;
+    toggleItemDetails(itemData={}, action=false) {
+        console.log('called toggle')
+        this.showItemDetails = action;
     }
 
     btnClick(){

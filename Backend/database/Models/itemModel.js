@@ -10,7 +10,7 @@ const itemSchema = new mongoose.Schema({
     stock: Number,
     createdDate: String,
     updatedDate: String,
-    image: String,
+    mainImage: String,
     status: {
         type: String,
         required: false,
@@ -20,6 +20,15 @@ const itemSchema = new mongoose.Schema({
     discount: {
         type: Number,
         default: 0,
+        required: false
+    },
+    colors: {
+        default: {
+            color: '#fff',
+            colorName: 'white',
+            images: []
+        },
+        type: [],
         required: false
     }
 });
