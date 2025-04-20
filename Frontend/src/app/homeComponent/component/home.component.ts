@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit } from "@angular/core";
-import { CommonService } from "../../common.service";
+import { CommonService } from "../../app-common/common.service";
 import { HttpClient } from "@angular/common/http";
 
 @Component({

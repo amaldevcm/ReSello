@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { CommonService } from "src/app/app-common/common.service";
 
 @Component({
     selector: 'app-item-create',
@@ -25,7 +26,7 @@ export class ItemCreateComponent implements OnInit {
     @Output() output = new EventEmitter<any>();
 
     itemForm: FormGroup;
-    constructor(private http: HttpClient) {
+    constructor(private common: CommonService) {
         this.itemForm = new FormGroup({
             name: new FormControl('',Validators.required),
             type: new FormControl('',Validators.required),
@@ -58,7 +59,7 @@ export class ItemCreateComponent implements OnInit {
         }
 
         if(this.isEdited) {
-            this.http.put('http://localhost:3000/api/items',{item: postData}).subscribe(result => {
+            this.common.put('items', {item: postData}).subscribe(result => {
                 if(result !== undefined && result['status'] === 'Success') {
                     console.log('item saved');
                     this.cancel();
@@ -67,7 +68,7 @@ export class ItemCreateComponent implements OnInit {
                 }
             });
         } else {
-            this.http.post('http://localhost:3000/api/items',{item: postData}).subscribe(result => {
+            this.common.post('items', {item: postData}).subscribe(result => {
                 if(result !== undefined && result['status'] === 'Success') {
                     console.log('item saved');
                     this.cancel();

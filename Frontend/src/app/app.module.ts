@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
-import { CommonService } from './common.service';
+import { CommonService } from './app-common/common.service';
 import { HttpClientModule } from '@angular/common/http' 
 import { CommonModule } from '@angular/common';
 import { AppCommonModule } from './app-common/common.module';
