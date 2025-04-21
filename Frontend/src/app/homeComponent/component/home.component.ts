@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit{
         ]
     }
 
-    constructor(private common: CommonService, private http: HttpClient) {
+    constructor(private common: CommonService) {
         this.isAdmin = this.common.isAdmin;
         this.cart = this.common.cart;
     }
@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit{
     }
 
     getItemList() {
-        this.http.get("http://localhost:3000/api/items").subscribe(result => {
+        this.common.get("items").subscribe(result => {
             if(result && result !== undefined) {
                 result['items'].forEach(item =>{
                     item.discountPrice = item.selling - (item.selling*item.discount)/100;
