@@ -18,8 +18,7 @@ app.use('/api/users', userRoute);
 
 // cart data processing
 
-
-
-app.listen(3000,() => {
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
     console.log("Listening to localhost: 3000");
 });
