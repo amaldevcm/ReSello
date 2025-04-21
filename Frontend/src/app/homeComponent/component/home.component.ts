@@ -24,9 +24,9 @@ export class HomeComponent implements OnInit{
                 color: '#111',
                 colorName: 'Glossy white',
                 images: [
-                    'https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg',
-                    'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg',
-                    'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-02.jpg'
+                    'https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-02-featured-product-shot.jpg',
+                    'https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg',
+                    'https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-02-tertiary-product-shot-02.jpg'
                 ]
             }
         ]
