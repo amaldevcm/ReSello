@@ -10,7 +10,7 @@ export class CommonService {
     currentUser: Object;
     cart: any = [];
 
-    serverurl = "http://localhost:3000/api/";
+    serverurl = "https://e-commerce-agf9.onrender.com/api/";
     constructor(private http: HttpClient) {
 
     }
