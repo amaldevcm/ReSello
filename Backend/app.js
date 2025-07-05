@@ -3,7 +3,9 @@ const cors = require('cors');
 const mongoose = require('./database/mongoose')
 const app = new express();
 const moment = require('moment');
+const dotenv = require('dotenv');
 
+dotenv.config();
 app.use(cors());
 app.use(express.json()); 
 

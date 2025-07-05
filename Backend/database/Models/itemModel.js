@@ -1,36 +1,19 @@
 const mongoose = require('mongoose');
 
 const itemSchema = new mongoose.Schema({
-    id: Number,
-    creatorId: Number,
+    userId: Object,
     name: String,
-    type: String,
-    cost: Number,
-    selling: Number,
-    stock: Number,
+    category: String,
+    description: String,
+    price: Number,
     createdDate: String,
     updatedDate: String,
-    mainImage: String,
+    images: Array,
     status: {
         type: String,
         required: false,
         default: 'Active'
     },
-    description: String,
-    discount: {
-        type: Number,
-        default: 0,
-        required: false
-    },
-    colors: {
-        default: {
-            color: '#fff',
-            colorName: 'white',
-            images: []
-        },
-        type: [],
-        required: false
-    }
 });
 
 const Item = new mongoose.model('Items', itemSchema);
