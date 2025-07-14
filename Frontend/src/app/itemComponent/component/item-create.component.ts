@@ -20,18 +20,18 @@ export class ItemCreateComponent implements OnInit {
         status: null,
         description: null,
         discount: null,
-
     };
+    
     @Input() isEdited = false;
     @Output() output = new EventEmitter<any>();
 
     itemForm: FormGroup;
     constructor(private common: CommonService) {
         this.itemForm = new FormGroup({
-            name: new FormControl('',Validators.required),
-            type: new FormControl('',Validators.required),
-            cost: new FormControl('',Validators.required),
-            selling: new FormControl('',Validators.required),
+            name: new FormControl('', Validators.required),
+            type: new FormControl('', Validators.required),
+            cost: new FormControl('', Validators.required),
+            selling: new FormControl('', Validators.required),
             image: new FormControl(''),
             status: new FormControl(''),
             description: new FormControl(''),

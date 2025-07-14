@@ -1,35 +1,31 @@
-<!-- <div class="top-nav px-2">
-  <span class="logo">Shop Go</span>
-  <div class="nav-btns">
-    <ul type="none">
-      <li><button class="btn" routerLink="/" routerLinkActive="false">Home</button></li>
-      <li><button class="btn" routerLink="/user" routerLinkActive="false">Users</button></li>
-      <li><button class="btn" routerLink="/item" routerLinkActive="false">Items</button></li>
-    </ul>
-  </div>
-  <img class="profile_pic" src="../assets/profile_pic.jpg" alt="">
-</div>
-
-<div class="row mx-0">
-  <router-outlet></router-outlet> 
-</div> -->
-
-
 <div class=" px-3 h-16 flex flex-row justify-between items-center border-gray-200 border-b-2 bg-white shadow">
   <!-- <img src="../assets/ElectroCart.png" alt="logo" class="h-10 w-10 rounded-full"> -->
   <div class="w=1/3">
-    <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600" alt="logo" class="w-8">
+    <img src="../assets/logo.svg" alt="logo" class="w-8">
   </div>
   <div class="w-1/3 items-center flex border-1 border-gray-400 py-2 px-3 rounded-lg focus-within:border-blue-400">
     <input type="text" name="search" id="search" placeholder="Search" class="w-full h-1/2 outline-none border-none">
     <i class="bi bi-search"></i>
   </div>
-  <div class="flex px-3 menu-options">
+  <!-- <div class="flex px-3 menu-options">
     <button class="text-black-300 hover:border-gray-300 border-transparent focus:outline-none border-b-2 px-3 py-2 text-sm font-medium"  routerLink="/" routerLinkActive="true">Home</button>
     <button class="text-black-300 hover:border-gray-300 border-transparent focus:outline-none border-b-2 px-3 py-2 text-sm font-medium" routerLink="/user" routerLinkActive="false">Users</button>
     <button class="text-black-300 hover:border-gray-300 border-transparent focus:outline-none border-b-2 px-3 py-2 text-sm font-medium" routerLink="/item" routerLinkActive="false">Items</button>
+  </div> -->
+
+  <div class="flex px-3">
+    <button class="text-2xl mx-3" routerLink="/" routerLinkActive="true">
+      <i class="bi bi-chat-text-fill"></i>
+    </button>
+    <button class="text-2xl mx-3" routerLink="/" routerLinkActive="true">
+      <i class="bi bi-cart3"></i>
+    </button>
+    <button class="text-2xl mx-3" routerLink="/account" routerLinkActive="true">
+      <i class="bi bi-person-fill"></i>
+    </button>
   </div>
 </div>
+
 
 <div class="relative overflow-y-auto h-5/6 bg-white px-3 mt-6">
   <router-outlet></router-outlet>

@@ -1,0 +1,80 @@
+<div class="w-full justify-center align-middle flex flex-row px-6 py-12 lg:px-8 border-gray-500">
+    <img src="../../../assets/signin.jpg" alt="Sign in logo" class="w-2/5 rounded-e-lg hidden lg:inline-block align-middle" />
+
+    <div class="w-full lg:w-2/5 ">
+        <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+            <img class="mx-auto h-10 w-auto" src="../../../assets/logo.svg" alt="Your Company" />
+            <h2 class="mt-6 text-center text-2xl/9 font-bold tracking-tight">Create new account</h2>
+        </div>
+
+        <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+            <form class="space-y-4" [formGroup]="signupForm">
+                <div>
+                    <label for="name" class="block text-sm/6 font-medium ">Full Name</label>
+                    <div class="mt-2">
+                        <input type="text" name="name" id="name" required
+                            [(ngModel)]="data.name" formControlName="name"
+                            class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
+                    </div>
+                    @if(signupForm.dirty && signupForm.controls.name.errors) {
+                        <label for="" class="text-red-500 text-sm/6">
+                                <i class="bi bi-exclamation-circle"></i> Required
+                        </label>
+                    }
+                </div>
+                <div>
+                    <label for="email" class="block text-sm/6 font-medium ">Email address</label>
+                    <div class="mt-2">
+                        <input type="email" name="email" id="email" autoComplete="email" required
+                            [(ngModel)]="data.email" formControlName="email"
+                            class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
+                    </div>
+                    @if(signupForm.dirty && signupForm.controls.email.errors) {
+                        <label for="" class="text-red-500 text-sm/6">
+                                <i class="bi bi-exclamation-circle"></i> Required
+                        </label>
+                    }
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm/6 font-medium ">Password</label>
+                    <div class="mt-2">
+                        <input type="password" name="password" id="password" required
+                            [(ngModel)]="data.password" formControlName="password"
+                            class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
+                    </div>
+                    @if(signupForm.dirty && signupForm.controls.password.errors) {
+                        <label for="" class="text-red-500 text-sm/6">
+                                <i class="bi bi-exclamation-circle"></i> Required
+                        </label>
+                    }
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm/6 font-medium ">Re-type Password</label>
+                    <div class="mt-2">
+                        <input type="password" name="re-password" id="re-password" required
+                            [(ngModel)]="data.re_pass" formControlName="re_pass"
+                            class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
+                    </div>
+                    @if(signupForm.dirty && signupForm.controls.re_pass.errors) {
+                        <label for="" class="text-red-500 text-sm/6">
+                                <i class="bi bi-exclamation-circle"></i> Required
+                        </label>
+                    }
+                </div>
+
+                <div>
+                    <button type="submit" onclick="signUp()"
+                        class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Register</button>
+                </div>
+            </form>
+
+            <p class="mt-10 text-center text-sm/6 text-gray-500">
+                Have an account?
+                <a class="font-semibold text-indigo-600 hover:text-indigo-500" routerLink="/account/login"
+                    routerLinkActive="false"> Login</a>
+            </p>
+        </div>
+    </div>
+</div>
