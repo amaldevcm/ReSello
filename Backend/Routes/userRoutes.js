@@ -1,21 +1,23 @@
 const express = require('express');
 const router = express.Router();
 const userModel = require('../database/Models/userModel');
-const moment = require('moment')
+const moment = require('moment');
+const jwt = require('jsonwebtoken');
+const auth = require('../Middleware/auth')
 
-router.get('/', (req, res)=> {
+router.get('/', auth, (req, res)=> {
     userModel.find().then(result => {
         res.status(200).send({users: result});
     });
 });
 
-router.get('/:id', (req, res)=> {
+router.get('/:id', auth, (req, res)=> {
     userModel.find({_id: req.params.id}).then(result => {
         res.status(200).send({user: result});
     });
 });
 
-router.post('/', (req, res) => {
+router.post('/', auth, (req, res) => {
     if(req && req.body !== undefined) {
         userModel.find().then(result => {
             let data = req.body.user;
@@ -29,7 +31,7 @@ router.post('/', (req, res) => {
     }
 });
 
-router.put('/', (req, res) => {
+router.put('/', auth, (req, res) => {
     if(req && req.body !== undefined) {
         let data = req.body.user;
         data.updatedDate = moment().toDate().toISOString();
@@ -39,5 +41,23 @@ router.put('/', (req, res) => {
     }
 });
 
+router.post('/register', auth, async (req, res) => {
+    try {
+    const user = await userModel.create(req.body);
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
+    res.json({ token: token });
+  } catch (err) {
+    res.status(400).json({ error: 'SignUp failed' });
+  }
+});
+
+router.post('/login', auth, async(req, res) => {
+    const user = await userModel.findOne({ email: req.body.email });
+    if (!user || !(await bcrypt.compare(req.body.password, user.password))) {
+        return res.status(401).json({ error: 'Invalid credentials' });
+    }
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
+    res.json({ token: token, user: user});
+});
 
 module.exports = router;
