@@ -24,7 +24,7 @@ export class CommonService {
     }
 
 
-    serverurl = "https://e-commerce-agf9.onrender.com/api/";
+    serverurl = "https://resello-backend.onrender.com/api/";
     constructor(private http: HttpClient) {  
         this.headers = new HttpHeaders({
             'Content-Type': 'application/json',
