@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const itemModel = require('../database/Models/itemModel');
-const moment = require('moment')
+const moment = require('moment');
+const auth = require('../Middleware/auth');
 
 router.get('/', (req, res)=> {
     itemModel.find().then(result => {
@@ -16,7 +17,7 @@ router.get('/:id', (req, res)=> {
     });
 });
 
-router.post('/', (req, res) => {
+router.post('/', auth, (req, res) => {
     if(req && req.body !== undefined) {
         itemModel.find().then(result => {
             let data = req.body.item;
@@ -30,7 +31,7 @@ router.post('/', (req, res) => {
     }
 });
 
-router.put('/', (req, res) => {
+router.put('/', auth, (req, res) => {
     if(req && req.body !== undefined) {
         let data = req.body.item;
         data.updatedDate = moment().toDate().toISOString();

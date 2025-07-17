@@ -3,7 +3,8 @@ const router = express.Router();
 const userModel = require('../database/Models/userModel');
 const moment = require('moment');
 const jwt = require('jsonwebtoken');
-const auth = require('../Middleware/auth')
+const auth = require('../Middleware/auth');
+const bcrypt = require('bcrypt');
 
 router.get('/', auth, (req, res)=> {
     userModel.find().then(result => {
@@ -41,21 +42,39 @@ router.put('/', auth, (req, res) => {
     }
 });
 
-router.post('/register', auth, async (req, res) => {
+router.post('/register', async (req, res) => {
     try {
-    const user = await userModel.create(req.body);
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
-    res.json({ token: token });
-  } catch (err) {
-    res.status(400).json({ error: 'SignUp failed' });
-  }
+        req.body.createdDate = moment().toDate().toISOString();
+        req.body.updatedDate = moment().toDate().toISOString();
+        const user = await userModel.create(req.body);
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
+
+        // Filtering relevent data for client
+        const data = {... user}
+        delete data.createdDate;
+        delete data.updatedDate;
+        delete data.password;
+        delete data.status;
+
+        res.json({ token: token, user: user});
+    } catch (err) {
+        res.status(400).json({ error: 'SignUp failed' });
+    }
 });
 
-router.post('/login', auth, async(req, res) => {
+router.post('/login', async(req, res) => {
     const user = await userModel.findOne({ email: req.body.email });
     if (!user || !(await bcrypt.compare(req.body.password, user.password))) {
         return res.status(401).json({ error: 'Invalid credentials' });
     }
+
+    // Filtering relevent data for client
+    const data = {... user}
+    delete data.createdDate;
+    delete data.updatedDate;
+    delete data.password;
+    delete data.status;
+
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
     res.json({ token: token, user: user});
 });

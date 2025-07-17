@@ -1,22 +1,24 @@
 const express = require('express');
 const router = express.Router();
 const categoryModel = require('../database/Models/categoryModel');
+const auth = require('../Middleware/auth');
 
-router.get('/', (req, res) => {
+
+router.get('/', auth, (req, res) => {
     categoryModel.find().then(result => {
         res.send(result);
     }).catch(err => { res.status(400).send({status: "Error", msg: "No categories found!!!"})});
 });
 
 
-router.get('/:id', (req, res) => {
+router.get('/:id', auth, (req, res) => {
     let id = req.params.id;
     categoryModel.find({_id: id}).then(result => {
         res.send(result);
     }).catch(err => { res.status(400).send({status: "Error", msg: "No category found!!!"})});
 });
 
-router.post('/', (req, res) => {
+router.post('/', auth, (req, res) => {
     if(req && req.body !== undefined) {
         categoryModel.find().then(result => {
             let data = req.body.item;
