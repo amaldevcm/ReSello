@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import * as moment from "moment";
+import { CommonService } from "src/app/app-common/common.service";
 
 @Component({
     selector: 'app-item',
@@ -13,14 +14,14 @@ export class UserComponent implements OnInit{
     isEdited = false;
     userData = {}
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private common: CommonService) { }
     ngOnInit(): void {
         this.getUserList();
     }
 
     getUserList() {
-        this.http.get('http://localhost:3000/api/users').subscribe(response => {
-            console.log("user list", response);
+        this.common.get('users').subscribe(response => {
+            // console.log("user list", response);
             if(response && response !== undefined) {
                 this.userList = response['users'];
                 this.userList.forEach(user => {

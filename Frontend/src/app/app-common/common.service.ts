@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 
 @Injectable({
@@ -6,28 +6,75 @@ import { Injectable } from "@angular/core";
 })
 
 export class CommonService {
-    isAdmin: boolean = true;
     currentUser: Object;
     cart: any = [];
+    token = null;
+    headers: HttpHeaders;
+    isLoggedIn: Boolean = false;
 
-    serverurl = "https://e-commerce-agf9.onrender.com/api/";
-    constructor(private http: HttpClient) {
+    user = {
+        _id: null,
+        name: null,
+        email: null,
+        mobile: null,
+        address: null,
+        zipcode: null,
+        role: "user",
+        rating: null
+    }
 
+
+    // serverurl = "https://e-commerce-agf9.onrender.com/api/";
+    serverurl = "http://localhost:3000/api/"
+    constructor(private http: HttpClient) {  
+        this.headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('session-token')
+        });
+    }
+
+    updateUserData(data) {
+        console.log('inside common',data)
+        this.user = data;
     }
 
     get(reqPath: String) {
-        return this.http.get(this.serverurl+reqPath);
+        if(localStorage.getItem('seesion-token') !== null){
+            this.headers = new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem('session-token')
+            });
+        }
+        return this.http.get(this.serverurl+reqPath, {headers: this.headers});
     }
 
     post(reqPath: String, body:any = null) {
-        return this.http.post(this.serverurl+reqPath, body)
+        if(localStorage.getItem('seesion-token') !== null){
+            this.headers = new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem('session-token')
+            });
+        }
+        return this.http.post(this.serverurl+reqPath, body, {headers: this.headers})
     }
 
     put(reqPath: String, body:any = null) {
-        return this.http.put(this.serverurl+reqPath, body);
+        if(localStorage.getItem('seesion-token') !== null){
+            this.headers = new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem('session-token')
+            });
+        }
+        return this.http.put(this.serverurl+reqPath, body, {headers: this.headers});
     }
 
     delete(reqPath:String, id:Number) {
-        return this.http.delete(this.serverurl + reqPath+'?id='+id.toString());
+        if(localStorage.getItem('seesion-token') !== null){
+            this.headers = new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem('session-token')
+            });
+        }
+        return this.http.delete(this.serverurl + reqPath+'?id='+id.toString(), {headers: this.headers});
     }
 }

@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { CommonService } from "src/app/app-common/common.service";
 
 @Component({
     selector: 'app-user-create',
@@ -20,7 +21,7 @@ export class UserCreateComponent implements OnInit{
 
     userForm: FormGroup;
     
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient, private common: CommonService) {}
 
     ngOnInit(): void {
         this.userForm = new FormGroup({
@@ -62,7 +63,7 @@ export class UserCreateComponent implements OnInit{
         }
 
         if(this.isEdited) {
-            this.http.put('http://localhost:3000/api/users',{user: postData}).subscribe(result => {
+            this.common.put('users',{user: postData}).subscribe(result => {
                 if(result !== undefined && result['status'] === 'Success') {
                     console.log('User saved');
                     this.cancel();
@@ -71,7 +72,7 @@ export class UserCreateComponent implements OnInit{
                 }
             });
         } else {
-            this.http.post('http://localhost:3000/api/users',{user: postData}).subscribe(result => {
+            this.common.post('users',{user: postData}).subscribe(result => {
                 if(result !== undefined && result['status'] === 'Success') {
                     console.log('User saved');
                     this.cancel();

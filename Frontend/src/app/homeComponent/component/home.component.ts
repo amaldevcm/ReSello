@@ -33,8 +33,8 @@ export class HomeComponent implements OnInit{
     }
 
     constructor(private common: CommonService) {
-        this.isAdmin = this.common.isAdmin;
         this.cart = this.common.cart;
+        this.isAdmin = this.common.user.role === 'admin';
     }
 
     ngOnInit(): void {
