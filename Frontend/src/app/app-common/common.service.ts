@@ -28,7 +28,7 @@ export class CommonService {
     private userSubject = new BehaviorSubject<User | null>(null);
     user$ = this.userSubject.asObservable();
 
-    serverurl = "https://e-commerce-agf9.onrender.com/api/";
+    serverurl = "https://resello-backend.onrender.com/api/";
 
     constructor(private http: HttpClient) {
         const savedUser = localStorage.getItem('user');
