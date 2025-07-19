@@ -45,7 +45,7 @@ export class SignupComponent {
             this.common.post('users/register', this.data).subscribe(result => {
                 if(result && result['error'] === null) {
                     localStorage.setItem('session-token', result['token']);
-                    this.common.updateUserData(result['user']);
+                    this.common.setUserData(result['user']);
                     this.common.isLoggedIn = true;
                     this.router.navigate(['']);
                 } else {

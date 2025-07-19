@@ -1,5 +1,17 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { BehaviorSubject } from "rxjs";
+
+interface User {
+    _id: Object,
+    name: String,
+    email: String,
+    mobile: Number,
+    address: String,
+    zipcode: Number,
+    role: String,
+    rating: Number
+}
 
 @Injectable({
     providedIn: 'root'
@@ -12,30 +24,42 @@ export class CommonService {
     headers: HttpHeaders;
     isLoggedIn: Boolean = false;
 
-    user = {
-        _id: null,
-        name: null,
-        email: null,
-        mobile: null,
-        address: null,
-        zipcode: null,
-        role: "user",
-        rating: null
-    }
-
+    // User details
+    private userSubject = new BehaviorSubject<User | null>(null);
+    user$ = this.userSubject.asObservable();
 
     // serverurl = "https://e-commerce-agf9.onrender.com/api/";
-    serverurl = "http://localhost:3000/api/"
-    constructor(private http: HttpClient) {  
+    serverurl = "http://localhost:3000/api/";
+
+    constructor(private http: HttpClient) {
+        const savedUser = localStorage.getItem('user');
+        if (savedUser) {
+            this.userSubject.next(JSON.parse(savedUser));
+        }
+
+        if(localStorage.getItem('session-token') !== null) {
+            this.headers = new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem('session-token')
+            });
+        }
         this.headers = new HttpHeaders({
             'Content-Type': 'application/json',
-            'Authorization': localStorage.getItem('session-token')
         });
     }
 
-    updateUserData(data) {
-        console.log('inside common',data)
-        this.user = data;
+    setUserData(data) {
+        this.userSubject.next(data);
+        localStorage.setItem('user', JSON.stringify(data));
+    }
+
+    getUserData() {
+        return this.userSubject.getValue();
+    }
+
+    clearUser() {    
+        this.userSubject.next(null);
+        localStorage.removeItem('user');
     }
 
     get(reqPath: String) {

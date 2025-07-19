@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit{
 
     constructor(private common: CommonService) {
         this.cart = this.common.cart;
-        this.isAdmin = this.common.user.role === 'admin';
+        this.isAdmin = this.common.getUserData()?.role === 'admin';
     }
 
     ngOnInit(): void {

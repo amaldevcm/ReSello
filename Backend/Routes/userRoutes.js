@@ -50,11 +50,10 @@ router.post('/register', async (req, res) => {
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
 
         // Filtering relevent data for client
-        const data = {... user}
-        delete data.createdDate;
-        delete data.updatedDate;
-        delete data.password;
-        delete data.status;
+        delete user.createdDate;
+        delete user.updatedDate;
+        delete user.password;
+        delete user.status;
 
         res.json({ token: token, user: user});
     } catch (err) {
@@ -69,11 +68,10 @@ router.post('/login', async(req, res) => {
     }
 
     // Filtering relevent data for client
-    const data = {... user}
-    delete data.createdDate;
-    delete data.updatedDate;
-    delete data.password;
-    delete data.status;
+    delete user.createdDate;
+    delete user.updatedDate;
+    delete user.password;
+    delete user.status;
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
     res.json({ token: token, user: user});

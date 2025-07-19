@@ -1,3 +1,49 @@
-<div>
-    <h1>Hi {{user.name}}</h1>
+<div class="flex h-full overflow-hidden">
+    <div class="hidden md:flex flex-col w-64 bg-white border-r border-gray-200">
+        <div class="p-4 border-b border-gray-200">
+            <div class="flex items-center">
+                <span class="ml-2 text-xl font-semibold text-gray-800">DashBoard</span>
+            </div>
+        </div>
+        
+        <nav class="flex-1 pt-4">
+            <ul>
+                <li>
+                    <button class="flex items-center w-full px-4 py-3 text-left text-gray-700 hover:bg-gray-100" (click)='setActiveTab("anaytics")'>
+                        <span class="mr-3"><i class="bi bi-bar-chart-fill"></i></span>
+                        Analytics
+                    </button>
+                </li>
+                <li>
+                    <button class="flex items-center w-full px-4 py-3 text-left text-gray-700 hover:bg-gray-100" (click)='setActiveTab("listing")'>
+                        <span class="mr-3"><i class="bi bi-list-task"></i></span>
+                        Listings
+                    </button>
+                </li>
+                <li>
+                    <button class="flex items-center w-full px-4 py-3 text-left text-gray-700 hover:bg-gray-100" (click)='setActiveTab("profile")'>
+                        <span class="mr-3"><i class="bi bi-person"></i></span>
+                        User Profile
+                    </button>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="p-4 border-t border-gray-200">
+            <button class="flex items-center text-gray-700 hover:text-red-600">
+                <i class="bi bi-box-arrow-right mr-3"></i>
+                Log out
+            </button>
+        </div>
+    </div>
+
+    <main class="flex-1 overflow-y-auto bg-gray-50 px-2">
+        @if(activeTab === 'profile') {
+            <app-profile></app-profile>
+        } @else if(activeTab === 'listing') {
+            <app-listing></app-listing>   
+        } @else {
+            <app-analytics></app-analytics>
+        }
+    </main>
 </div>

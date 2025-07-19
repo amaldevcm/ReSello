@@ -10,11 +10,16 @@ export class AppComponent implements OnInit{
 
   isLoggedIn: Boolean = false;
   userName:String = null;
-  constructor(common: CommonService) { 
+
+  constructor(public common: CommonService) { 
     this.isLoggedIn = common.isLoggedIn;
-    this.userName = common.user.name;
   }
 
   ngOnInit(): void {
+    this.common.user$.subscribe(user => {
+      if(user) {
+        this.userName = user.name;
+      }
+    });
   }
 }
