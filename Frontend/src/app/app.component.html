@@ -20,9 +20,9 @@
     <button class="text-2xl mx-3" routerLink="/" routerLinkActive="true">
       <i class="bi bi-cart3"></i>
     </button>
-    <button class="align-middle flex mx-3" routerLink="/account" routerLinkActive="true">
+    <button class="align-middle flex mx-3" routerLink="/profile" routerLinkActive="true">
       <i class="bi bi-person-fill text-2xl"></i>
-      <label class="mx-1 font-medium">Account</label>
+      <label class="mx-1 font-medium">{{common.isLoggedIn? userName.split(' ')[0]: 'Account'}}</label>
     </button>
   </div>
 </div>

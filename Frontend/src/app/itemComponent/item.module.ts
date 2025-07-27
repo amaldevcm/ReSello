@@ -19,7 +19,8 @@ import { AppCommonModule } from "../app-common/common.module";
         ItemRoutingModule,
         ReactiveFormsModule,
         AppCommonModule
-    ]
+    ],
+    exports: [ItemCreateComponent]
 })
 
 export class ItemModule { }

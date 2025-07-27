@@ -28,7 +28,8 @@ export class CommonService {
     private userSubject = new BehaviorSubject<User | null>(null);
     user$ = this.userSubject.asObservable();
 
-    serverurl = "https://resello-backend.onrender.com/api/";
+    // serverurl = "https://resello-backend.onrender.com/api/";
+    serverurl = "http://localhost:3000/api/";
 
     constructor(private http: HttpClient) {
         const savedUser = localStorage.getItem('user');
@@ -37,6 +38,7 @@ export class CommonService {
         }
 
         if(localStorage.getItem('session-token') !== null) {
+            this.isLoggedIn = true;
             this.headers = new HttpHeaders({
                 'Content-Type': 'application/json',
                 'Authorization': localStorage.getItem('session-token')

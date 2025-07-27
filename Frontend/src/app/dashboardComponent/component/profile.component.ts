@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { CommonService } from "src/app/app-common/common.service";
 
 @Component({
@@ -7,6 +7,8 @@ import { CommonService } from "src/app/app-common/common.service";
 })
 
 export class ProfileComponent {
+    @Input() analytics;
+
     user:any;
 
     constructor(private common: CommonService) {

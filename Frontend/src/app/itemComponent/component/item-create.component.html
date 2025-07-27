@@ -34,7 +34,7 @@
                 </div>
             </div>
 
-            <div class="flex h-fit">
+            <!-- <div class="flex h-fit">
                 <label for="selling" class="w-1/3 block text-sm font-medium leading-6 text-gray-900">Selling Price</label>  
                 <div class="relative flex-1 text-gray-700">
                     <i class="bi bi-currency-rupee absolute top-1/4 left-1"></i>
@@ -50,9 +50,9 @@
                     <input type="text" id="discount" name="discount" formControlName="discount" [(ngModel)]="data.discount"
                         class="w-full border-1 px-2 pe-4 border-gray-500 rounded bg-transparent py-1.5 pl-1 focus:border-blue-400 text-gray-700 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6">
                 </div>
-            </div>
+            </div> -->
 
-            <div class="flex h-fit">
+            <div class="flex h-fit" [hidden]="!isEdited">
                 <label for="" class="w-1/3 block text-sm font-medium leading-6 text-gray-900">Status</label>
                 <label for="status" class="switch">
                     <input type="checkbox" name="status" id="status" [(ngModel)]="data.status" formControlName="status">

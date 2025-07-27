@@ -1,4 +1,4 @@
-<div>
+<div class="mb-6">
     <h1 class="text-2xl font-bold text-gray-800 mb-6">User Profile</h1>
 
     <div class="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
@@ -18,32 +18,20 @@
                     <h2 class="mt-4 text-xl font-semibold text-gray-800">
                         {{user.name}}
                     </h2>
-                    <p class="text-gray-600">{{user.role}}</p>
-                    <div class="mt-6 w-full">
-                        <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wider mb-2">
-                            Account Details
-                        </h3>
-                        <ul class="space-y-2">
-                            <li class="text-sm">
-                                <span class="text-gray-500">Email:</span>
-                                <span class="ml-2 text-gray-800">{{user.email}}</span>
-                            </li>
-                            <li class="text-sm">
-                                <span class="text-gray-500">Phone:</span>
-                                <span class="ml-2 text-gray-800">{{user.phone}}</span>
-                            </li>
-                            <li class="text-sm">
-                                <span class="text-gray-500">Address:</span>
-                                <span class="ml-2 text-gray-800">{{user.address}}</span>
-                            </li>
-                        </ul>
+
+                    <div>
+                        <span>Rating: 
+                            <i class="bi bi-star-fill text-yellow-500"></i>
+                            {{user.rating? user.rating: 0}}
+                        </span>
+
                     </div>
                 </div>
             </div>
             <!-- Profile Form -->
             <div class="md:w-2/3 p-6">
                 <form>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div>
                             <label for="name" class="block text-sm font-medium text-gray-700 mb-1">
                                 Full Name
@@ -69,8 +57,13 @@
                             <label for="role" class="block text-sm font-medium text-gray-700 mb-1">
                                 Role
                             </label>
-                            <input type="text" id="role" name="role" value={{user.role}}
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
+                            <select name="role" id="role" [(ngModel)]="user.role"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                                <option value="admin">Admin</option>
+                                <option value="user">User</option>
+                            </select>
+                            <!-- <input type="text" id="role" name="role" value={{user.role}}
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500" /> -->
                         </div>
                         <div class="col-span-2">
                             <label for="address" class="block text-sm font-medium text-gray-700 mb-1">
@@ -79,13 +72,6 @@
                             <input type="text" id="address" name="address" value={{user.address}}
                             
                                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
-                        </div>
-                        <div class="col-span-2">
-                            <label for="bio" class="block text-sm font-medium text-gray-700 mb-1">
-                                Bio
-                            </label>
-                            <textarea id="bio" name="bio" rows="3"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
                         </div>
                     </div>
                     <div class="mt-8 flex justify-end">
@@ -101,6 +87,32 @@
                     </div>
                 </form>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+    <!-- <h1 class="text-2xl font-bold text-gray-800 mb-6">User Profile</h1> -->
+    <div class="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
+        <div class="flex items-center justify-between mb-2">
+            <span class="text-sm font-medium text-gray-500">Total Revenue</span>
+            <div class="p-2 rounded-full bg-gray-50"><i class="bi bi-currency-dollar text-blue-600 h-6 w-6 "></i></div>
+        </div>
+        <div class="flex items-baseline">
+            <h3 class="text-xl font-bold text-gray-800">
+                <i class="bi bi-currency-dollar"></i>
+                {{analytics?.totalProfit}}
+            </h3>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
+        <div class="flex items-center justify-between mb-2">
+            <span class="text-sm font-medium text-gray-500">Products Sold</span>
+            <div class="p-2 rounded-full bg-gray-50"><i class="h-6 w-6 text-green-600 bi bi-cart text-xl"></i></div>
+        </div>
+        <div class="flex items-baseline">
+            <h3 class="text-xl font-bold text-gray-800">{{analytics?.totalSales}}</h3>
         </div>
     </div>
 </div>

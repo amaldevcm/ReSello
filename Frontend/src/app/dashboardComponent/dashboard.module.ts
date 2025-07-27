@@ -7,6 +7,7 @@ import { DashboardRouting } from "./dashboard-routing.module";
 import { ListingComponent } from "./component/listing.component";
 import { ProfileComponent } from "./component/profile.component";
 import { AnalyticsComponent } from "./component/analytics.component";
+import { ItemModule } from "../itemComponent/item.module";
 
 @NgModule({
     declarations: [
@@ -18,7 +19,8 @@ import { AnalyticsComponent } from "./component/analytics.component";
     imports: [
         CommonModule,
         FormsModule,
-        DashboardRouting
+        DashboardRouting,
+        ItemModule
     ],
     exports: [],
     providers: [CommonService]

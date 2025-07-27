@@ -12,8 +12,9 @@ const itemSchema = new mongoose.Schema({
     status: {
         type: String,
         required: false,
-        default: 'Active'
+        default: 'active'
     },
+    buyerId: Object,
 });
 
 const Item = new mongoose.model('Items', itemSchema);

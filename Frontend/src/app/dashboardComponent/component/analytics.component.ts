@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
 
 @Component({
     selector: 'app-analytics',
@@ -6,5 +6,7 @@ import { Component } from "@angular/core";
 })
 
 export class AnalyticsComponent {
+    @Input() analytics;
+    
     constructor() {}
 }

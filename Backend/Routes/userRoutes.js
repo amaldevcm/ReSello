@@ -7,15 +7,16 @@ const auth = require('../Middleware/auth');
 const bcrypt = require('bcrypt');
 
 router.get('/', auth, (req, res)=> {
-    userModel.find().then(result => {
-        res.status(200).send({users: result});
-    });
-});
-
-router.get('/:id', auth, (req, res)=> {
-    userModel.find({_id: req.params.id}).then(result => {
-        res.status(200).send({user: result});
-    });
+    const id = req.query.id;
+    if(id) {
+        userModel.find({_id: req.params.id}).then(result => {
+            res.status(200).send({user: result});
+        });
+    } else {
+        userModel.find().then(result => {
+            res.status(200).send({users: result});
+        });
+    }
 });
 
 router.post('/', auth, (req, res) => {

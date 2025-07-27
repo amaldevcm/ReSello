@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { CommonService } from "src/app/app-common/common.service";
 
@@ -9,7 +9,9 @@ import { CommonService } from "src/app/app-common/common.service";
 
 export class DashboardComponent implements OnInit{
     user = null;
-    activeTab = 'analytics';
+    activeTab = 'listing';
+    analytics: Object = {};
+    listings = [];
 
     constructor(private common: CommonService, private router: Router) {
         this.user = common.getUserData();
@@ -19,9 +21,24 @@ export class DashboardComponent implements OnInit{
         if(this.user === null) {
             this.router.navigate(['/account/login']);
         }
+        this.getListings();
+    }
+
+    getListings() {
+        this.common.get('items/listing?id='+this.user._id).subscribe((result) => {
+            if(result) {
+                this.analytics = result['analytics'];
+                this.listings = result['items'];
+            }
+        });
+        console.log(this.analytics, this.listings)
     }
 
     setActiveTab(tab) {
         this.activeTab = tab;
+    }
+
+    logout() {
+        
     }
 }
