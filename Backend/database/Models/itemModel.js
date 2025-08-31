@@ -8,13 +8,16 @@ const itemSchema = new mongoose.Schema({
     price: Number,
     createdDate: String,
     updatedDate: String,
-    images: Array,
+    image: String,
     status: {
         type: String,
         required: false,
         default: 'active'
     },
-    buyerId: Object,
+    buyerId: {
+        type: Object,
+        default: null,
+    },
 });
 
 const Item = new mongoose.model('Items', itemSchema);

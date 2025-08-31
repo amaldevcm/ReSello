@@ -6,40 +6,40 @@ const jwt = require('jsonwebtoken');
 const auth = require('../Middleware/auth');
 const bcrypt = require('bcrypt');
 
-router.get('/', auth, (req, res)=> {
+router.get('/', auth, (req, res) => {
     const id = req.query.id;
-    if(id) {
-        userModel.find({_id: req.params.id}).then(result => {
-            res.status(200).send({user: result});
+    if (id) {
+        userModel.find({ _id: req.params.id }).then(result => {
+            res.status(200).send({ user: result });
         });
     } else {
         userModel.find().then(result => {
-            res.status(200).send({users: result});
+            res.status(200).send({ users: result });
         });
     }
 });
 
 router.post('/', auth, (req, res) => {
-    if(req && req.body !== undefined) {
+    if (req && req.body !== undefined) {
         userModel.find().then(result => {
             let data = req.body.user;
             data.createdDate = moment().toDate().toISOString();
             data.status = 'Active';
             let user = new userModel(data);
             user.save().then(r => {
-                res.status(200).send({msg: "User saved", status: "Success"});
-            }).catch(err => res.status(400).send({status: "Error", msg: "User not saved"}));
+                res.status(200).send({ msg: "User saved", status: "Success" });
+            }).catch(err => res.status(400).send({ status: "Error", msg: "User not saved" }));
         });
     }
 });
 
 router.put('/', auth, (req, res) => {
-    if(req && req.body !== undefined) {
+    if (req && req.body !== undefined) {
         let data = req.body.user;
         data.updatedDate = moment().toDate().toISOString();
-        userModel.updateOne({_id: data.id}, data).then(r => {
-            res.status(200).send({msg: "User Updated", status: "Success"});
-        }).catch(err => res.status(400).send({status: "Error", msg: "User not saved"}));
+        userModel.updateOne({ _id: data.id }, data).then(r => {
+            res.status(200).send({ msg: "User Updated", status: "Success" });
+        }).catch(err => res.status(400).send({ status: "Error", msg: "User not saved" }));
     }
 });
 
@@ -56,13 +56,13 @@ router.post('/register', async (req, res) => {
         delete user.password;
         delete user.status;
 
-        res.json({ token: token, user: user});
+        res.json({ token: token, user: user });
     } catch (err) {
         res.status(400).json({ error: 'SignUp failed' });
     }
 });
 
-router.post('/login', async(req, res) => {
+router.post('/login', async (req, res) => {
     const user = await userModel.findOne({ email: req.body.email });
     if (!user || !(await bcrypt.compare(req.body.password, user.password))) {
         return res.status(401).json({ error: 'Invalid credentials' });
@@ -75,7 +75,7 @@ router.post('/login', async(req, res) => {
     delete user.status;
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
-    res.json({ token: token, user: user});
+    res.json({ token: token, user: user });
 });
 
 module.exports = router;
