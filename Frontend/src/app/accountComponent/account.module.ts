@@ -6,7 +6,6 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { AppCommonModule } from "../app-common/common.module";
 import { AccountRoutingModule } from "./account-routing.module";
-import { CommonService } from "../app-common/common.service";
 
 @NgModule({
     declarations: [
@@ -21,7 +20,7 @@ import { CommonService } from "../app-common/common.service";
         ReactiveFormsModule,
         AppCommonModule
     ],
-    providers: [CommonService],
+    providers: [],
     exports: []
 })
 

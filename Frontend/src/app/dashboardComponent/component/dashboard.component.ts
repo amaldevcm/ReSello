@@ -7,9 +7,9 @@ import { CommonService } from "src/app/app-common/common.service";
     templateUrl: './dashboard.component.html'
 })
 
-export class DashboardComponent implements OnInit{
+export class DashboardComponent implements OnInit {
     user = null;
-    activeTab = 'listing';
+    activeTab = 'profile';
     analytics: Object = {};
     listings = [];
 
@@ -18,20 +18,19 @@ export class DashboardComponent implements OnInit{
     }
 
     ngOnInit(): void {
-        if(this.user === null) {
+        if (this.user === null) {
             this.router.navigate(['/account/login']);
         }
         this.getListings();
     }
 
     getListings() {
-        this.common.get('items/listing?id='+this.user._id).subscribe((result) => {
-            if(result) {
+        this.common.get('items/listing?id=' + this.user._id).subscribe((result) => {
+            if (result) {
                 this.analytics = result['analytics'];
                 this.listings = result['items'];
             }
         });
-        console.log(this.analytics, this.listings)
     }
 
     setActiveTab(tab) {
@@ -39,6 +38,7 @@ export class DashboardComponent implements OnInit{
     }
 
     logout() {
-        
+        localStorage.clear();
+        this.common.setUserData(null);
     }
 }

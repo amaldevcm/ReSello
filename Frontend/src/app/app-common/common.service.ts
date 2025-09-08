@@ -23,6 +23,8 @@ export class CommonService {
     token = null;
     headers: HttpHeaders;
     isLoggedIn: Boolean = false;
+    presignedAwsUrl = null;
+    awsKey = null;
 
     // User details
     private userSubject = new BehaviorSubject<User | null>(null);
@@ -36,7 +38,7 @@ export class CommonService {
             this.userSubject.next(JSON.parse(savedUser));
         }
 
-        if(localStorage.getItem('session-token') !== null) {
+        if (localStorage.getItem('session-token') !== null) {
             this.isLoggedIn = true;
             this.headers = new HttpHeaders({
                 'Content-Type': 'application/json',
@@ -57,48 +59,71 @@ export class CommonService {
         return this.userSubject.getValue();
     }
 
-    clearUser() {    
+    clearUser() {
         this.userSubject.next(null);
         localStorage.removeItem('user');
     }
 
-    get(reqPath: String) {
-        if(localStorage.getItem('seesion-token') !== null){
+    get(reqPath: String, params = null) {
+        if (localStorage.getItem('session-token') !== null) {
             this.headers = new HttpHeaders({
                 'Content-Type': 'application/json',
                 'Authorization': localStorage.getItem('session-token')
             });
         }
-        return this.http.get(this.serverurl+reqPath, {headers: this.headers});
+        console.log('Headers: ', this.headers);
+        return this.http.get(this.serverurl + reqPath, { headers: this.headers, params: params });
     }
 
-    post(reqPath: String, body:any = null) {
-        if(localStorage.getItem('seesion-token') !== null){
+    post(reqPath: String, body: any = null) {
+        if (localStorage.getItem('seesion-token') !== null) {
             this.headers = new HttpHeaders({
                 'Content-Type': 'application/json',
                 'Authorization': localStorage.getItem('session-token')
             });
         }
-        return this.http.post(this.serverurl+reqPath, body, {headers: this.headers})
+        return this.http.post(this.serverurl + reqPath, body, { headers: this.headers })
     }
 
-    put(reqPath: String, body:any = null) {
-        if(localStorage.getItem('seesion-token') !== null){
+    put(reqPath: String, body: any = null) {
+        if (localStorage.getItem('seesion-token') !== null) {
             this.headers = new HttpHeaders({
                 'Content-Type': 'application/json',
                 'Authorization': localStorage.getItem('session-token')
             });
         }
-        return this.http.put(this.serverurl+reqPath, body, {headers: this.headers});
+        return this.http.put(this.serverurl + reqPath, body, { headers: this.headers });
     }
 
-    delete(reqPath:String, id:Number) {
-        if(localStorage.getItem('seesion-token') !== null){
+    delete(reqPath: String, id: Number) {
+        if (localStorage.getItem('seesion-token') !== null) {
             this.headers = new HttpHeaders({
                 'Content-Type': 'application/json',
                 'Authorization': localStorage.getItem('session-token')
             });
         }
-        return this.http.delete(this.serverurl + reqPath+'?id='+id.toString(), {headers: this.headers});
+        return this.http.delete(this.serverurl + reqPath + '?id=' + id.toString(), { headers: this.headers });
+    }
+
+    // Upload files to AWS server
+    uploadToAws(file) {
+        const param = {
+            filename: file.name,
+            filetype: file.type
+        }
+
+        this.http.get(this.serverurl + 'presignedUrl', { headers: this.headers, params: param }).subscribe(result => {
+            const header = new HttpHeaders({
+                'Content-Type': file.type
+            });
+
+            this.http.put(result['url'], file, { headers: header }).subscribe(() => {
+                // this.get('getImgUrl', { imgKey: result['key'] }).subscribe(res => {
+                //     console.log(console.log('url: ', res['url']))
+                //     return res['url'];
+                // });
+                return null;
+            });
+        });
     }
 }

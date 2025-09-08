@@ -8,8 +8,7 @@
         <div class="relative w-full sm:w-64">
             <input type="text" placeholder="Search products..."
                 class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
-                value=""
-            />
+                value="" />
             <i class="bi bi-search absolute left-3 top-2.5 h-5 w-5 text-gray-400"></i>
         </div>
         <div class="flex">
@@ -24,7 +23,7 @@
                 New
             </button>
         </div>
-        
+
     </div>
 
     <!-- Listings Table -->
@@ -56,20 +55,21 @@
             </thead>
             <tbody class="bg-white divide-y divide-gray-200 overflow-x-auto">
                 @for (item of listings; track item._id) {
-                    <tr>
-                        <td class="">{{item.name}}</td>
-                        <td class="">{{item.categroy}}</td>
-                        <td class="">{{item.price}}</td>
-                        <td class="">{{item.price}}</td>
-                    </tr>
+                <tr>
+                    <td class="">{{item['name']}}</td>
+                    <td class="">{{item['categroy']}}</td>
+                    <td class="">{{item['price']}}</td>
+                    <td class="">{{item['status']}}</td>
+                </tr>
                 } @empty {
-                    <tr class="flex text-center text-sm text-gray-400">
-                        <p class="w-full">No listings found</p>
-                    </tr>
+                <tr class="flex text-center text-sm text-gray-400">
+                    <p class="w-full">No listings found</p>
+                </tr>
                 }
             </tbody>
         </table>
     </div>
 </div>
 
-<app-item-create [data]="selectedItem" [isEdited]="editItem" (output)="cancelEdit()" [hidden]="showListing"></app-item-create>
+<app-item-create [data]="selectedItem" [isEdited]="editItem" (output)="cancelEdit()"
+    [hidden]="showListing"></app-item-create>

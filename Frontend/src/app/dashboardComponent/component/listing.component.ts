@@ -1,11 +1,11 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 
 @Component({
     selector: 'app-listing',
     templateUrl: './listing.component.html'
 })
 
-export class ListingComponent {
+export class ListingComponent implements OnInit {
     @Input() listings;
 
     showListing = true;
@@ -13,8 +13,22 @@ export class ListingComponent {
     editItem = false;
 
     constructor() { }
-    
+
+    ngOnInit(): void {
+    }
+
     createNew() {
+        this.editItem = false;
+        this.selectedItem = {
+            id: null,
+            name: null,
+            type: null,
+            cost: null,
+            selling: null,
+            image: null,
+            status: null,
+            description: null,
+        };
         this.showListing = false;
     }
 

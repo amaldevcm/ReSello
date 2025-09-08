@@ -1,5 +1,4 @@
 import { NgModule } from "@angular/core";
-import { CommonService } from "../app-common/common.service";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { DashboardComponent } from "./component/dashboard.component";
@@ -23,7 +22,7 @@ import { ItemModule } from "../itemComponent/item.module";
         ItemModule
     ],
     exports: [],
-    providers: [CommonService]
+    providers: []
 })
 
-export class DashboardModule {}
+export class DashboardModule { }

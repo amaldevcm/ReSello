@@ -3,7 +3,6 @@ import { HomeComponent } from "./component/home.component";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
-import { CommonService } from "../app-common/common.service";
 import { HomeRouterModule } from "./home-routing.module";
 import { ItemDetails } from "./component/item-details.component";
 
@@ -18,7 +17,7 @@ import { ItemDetails } from "./component/item-details.component";
         HttpClientModule,
         HomeRouterModule
     ],
-    providers: [CommonService]
+    providers: []
 })
 
 export class HomeModule { }

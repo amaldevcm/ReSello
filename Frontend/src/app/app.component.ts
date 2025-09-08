@@ -1,15 +1,17 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonService } from './app-common/common.service';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit, OnDestroy {
   title = 'ReSello';
 
   isLoggedIn: Boolean = false;
-  userName:String = null;
+  userName: String = null;
+  private subscription !: Subscription;
 
   constructor(public common: CommonService) {
     this.isLoggedIn = common.isLoggedIn;
@@ -17,10 +19,15 @@ export class AppComponent implements OnInit{
 
   ngOnInit(): void {
     console.log(this.isLoggedIn)
-    this.common.user$.subscribe(user => {
-      if(user) {
+    this.subscription = this.common.user$.subscribe(user => {
+      if (user) {
         this.userName = user.name;
+        this.isLoggedIn = this.common.isLoggedIn;
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

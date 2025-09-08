@@ -1,4 +1,3 @@
-
 <div class="text-2xl font-bold border-gray-200 border-b-2 px-1 py-2">
     <span>{{isEdited? 'Update Item': 'New Item'}}</span>
 </div>
@@ -10,103 +9,94 @@
             <div class="flex h-fit">
                 <label for="name" class="w-1/3 block text-sm font-medium leading-6 text-gray-900">Name</label>
                 <input type="text" id="name" name="name" [(ngModel)]="data.name" formControlName="name"
-                        class="block flex-1 border-1 px-2 border-gray-500 rounded bg-transparent py-1.5 pl-1 focus:border-blue-400 text-gray-700 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6">
+                    class="block flex-1 border-1 px-2 border-gray-500 rounded bg-transparent py-1.5 pl-1 focus:border-blue-400 text-gray-700 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6">
             </div>
 
             <div class="row-span-2 flex h-fit">
                 <label for="desc" class="w-1/3 block text-sm font-medium leading-6 text-gray-900">Description</label>
-                <textarea id="desc" name="desc" rows="4" placeholder="Write product description" formControlName="description" [(ngModel)]="data.description"
-                        class="block flex-1 border-1 grid-rows-2 px-2 border-gray-500 rounded bg-transparent py-1.5 pl-1 focus:border-blue-400 text-gray-700 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"></textarea>
+                <textarea id="desc" name="desc" rows="4" placeholder="Write product description"
+                    formControlName="description" [(ngModel)]="data.description"
+                    class="block flex-1 border-1 grid-rows-2 px-2 border-gray-500 rounded bg-transparent py-1.5 pl-1 focus:border-blue-400 text-gray-700 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"></textarea>
             </div>
 
             <div class="flex h-fit">
                 <label for="category" class="w-1/3 block text-sm font-medium leading-6 text-gray-900">Category</label>
-                <input type="text" id="category" name="category" [(ngModel)]="data.type" formControlName="type" 
+                <input type="text" id="category" name="category" [(ngModel)]="data.category" formControlName="category"
                     class="block flex-1 border-1 px-2 border-gray-500 rounded bg-transparent py-1.5 pl-1 focus:border-blue-400 text-gray-700 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6">
             </div>
 
             <div class="flex h-fit">
-                <label for="cost" class="w-1/3 block text-sm font-medium leading-6 text-gray-900">Cost Price</label>
+                <label for="price" class="w-1/3 block text-sm font-medium leading-6 text-gray-900">Price</label>
                 <div class="relative flex-1 text-gray-700">
-                    <i class="bi bi-currency-rupee absolute top-1/4 left-1"></i>
-                    <input type="text" id="cost" name="cost" [(ngModel)]="data.cost" formControlName="cost"
+                    <i class="bi bi-currency-dollar absolute top-1/4 left-1"></i>
+                    <input type="text" id="price" name="price" [(ngModel)]="data.price" formControlName="price"
                         class="w-full border-1 px-2 ps-4 border-gray-500 rounded bg-transparent py-1.5 pl-1 focus:border-blue-400 text-gray-700 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6">
                 </div>
-            </div>
-
-            <!-- <div class="flex h-fit">
-                <label for="selling" class="w-1/3 block text-sm font-medium leading-6 text-gray-900">Selling Price</label>  
-                <div class="relative flex-1 text-gray-700">
-                    <i class="bi bi-currency-rupee absolute top-1/4 left-1"></i>
-                    <input type="text" id="selling" name="selling" formControlName="selling" [(ngModel)]="data.selling"
-                        class="w-full border-1 px-2 ps-4 border-gray-500 rounded bg-transparent py-1.5 pl-1 focus:border-blue-400 text-gray-700 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6">
-                    </div>
-                </div>
-
-            <div class="flex h-fit">
-                <label for="discount" class="w-1/3 block text-sm font-medium leading-6 text-gray-900">Discount</label>
-                <div class="relative flex-1 text-gray-700">
-                    <i class="bi bi-percent absolute top-1/4 right-1"></i>
-                    <input type="text" id="discount" name="discount" formControlName="discount" [(ngModel)]="data.discount"
-                        class="w-full border-1 px-2 pe-4 border-gray-500 rounded bg-transparent py-1.5 pl-1 focus:border-blue-400 text-gray-700 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6">
-                </div>
-            </div> -->
-
-            <div class="flex h-fit" [hidden]="!isEdited">
-                <label for="" class="w-1/3 block text-sm font-medium leading-6 text-gray-900">Status</label>
-                <label for="status" class="switch">
-                    <input type="checkbox" name="status" id="status" [(ngModel)]="data.status" formControlName="status">
-                    <span class="slider" data-label-on="Active" data-label-off="Inactive"></span>
-                </label>
             </div>
         </div>
 
         <!-- Image and colour section -->
         <div class="mt-5 w-1/2 grid grid-cols-3">
             <label for="" class="block text-sm font-medium leading-6 text-gray-900">Base image</label>
-            <label for="baseImg" class="h-56 p-2 col-span-2 text-center rounded-md border-dashed border-2 border-gray-300" *ngIf="!data.image">
+            @if(!data.image) {
+            <label for="baseImg"
+                class="h-56 p-2 col-span-2 text-center rounded-md border-dashed border-2 border-gray-300">
                 <div class="h-full flex flex-column align-middle">
                     <p class="text-3xl text-gray-400"><i class="bi bi-card-image"></i></p>
                     <p class="">Upload a file or drag and drop</p>
                     <p class="text-sm">PNG, JPG, GIF up to 10MB</p>
-                    <input type="file" class="hidden" id="baseImg" name="baseImg" accept="image/*" (change)="setImage($event, 'baseImage')">
+                    <input type="file" class="hidden" id="baseImg" name="baseImg" accept="image/*"
+                        (change)="setImage($event, 'baseImage')">
                 </div>
             </label>
-            <div class="h-56 relative col-span-2 text-center rounded-md border-solid border-gray-300 border-2 overflow-hidden" *ngIF="data.image && data.image.length !== 0">
-                <img class="object-contain object-center size-full shadow" src="{{data.image? data.image: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg'}}" alt="">
-                <button class="w-7 h-7 text-center absolute top-0 right-0 text-lg rounded-full hover:bg-gray-400 hover:text-white"><i class="bi bi-x-circle"></i></button>
+            } @else {
+            <div
+                class="h-56 relative col-span-2 text-center rounded-md border-solid border-gray-300 border-2 overflow-hidden">
+                <img class="object-contain object-center size-full shadow" src="{{data.image}}" alt="Product img">
+                <button
+                    class="w-7 h-7 text-center absolute top-0 right-0 text-lg rounded-full hover:bg-gray-400 hover:text-white"
+                    (click)="removeImg()">
+                    <i class="bi bi-x-circle"></i></button>
             </div>
+            }
         </div>
 
-        <div class="mt-5">
+        <!-- <div class="mt-5">
             <p class="mb-2 text-sm font-medium leading-6 text-gray-900 border-b-2 border-gray-300">Colours</p>
-            
+
             <div class="flow flow-col w-full overflow-x-auto">
                 <div class="flex flex-row gap-3">
                     <div class="flex flex-col">
                         <div class="grid grid-col-2">
-                            <label for="color_name" class="text-sm font-normal leading-6 text-gray-900 mr-1">Colour name</label>
-                            <input type="text" id="color_name" name="color_name" class="border-1 px-2 border-gray-500 rounded bg-transparent py-1.5 pl-1 focus:border-blue-400 text-gray-700 focus:ring-0 sm:text-sm sm:leading-6">
+                            <label for="color_name" class="text-sm font-normal leading-6 text-gray-900 mr-1">Colour
+                                name</label>
+                            <input type="text" id="color_name" name="color_name"
+                                class="border-1 px-2 border-gray-500 rounded bg-transparent py-1.5 pl-1 focus:border-blue-400 text-gray-700 focus:ring-0 sm:text-sm sm:leading-6">
 
-                            <label for="color_name" class="text-sm font-normal leading-6 text-gray-900 mr-1">Colour</label>
-                            <input type="color" id="color_name" name="color_name" class="border-1 px-2 border-gray-500 rounded bg-transparent py-1.5 pl-1 focus:border-blue-400 text-gray-700 focus:ring-0 sm:text-sm sm:leading-6">
+                            <label for="color_name"
+                                class="text-sm font-normal leading-6 text-gray-900 mr-1">Colour</label>
+                            <input type="color" id="color_name" name="color_name"
+                                class="border-1 px-2 border-gray-500 rounded bg-transparent py-1.5 pl-1 focus:border-blue-400 text-gray-700 focus:ring-0 sm:text-sm sm:leading-6">
                         </div>
                     </div>
-                    <label for="img-1" class="h-40 p-2 col-span-2 text-center rounded-md border-dashed border-2 border-gray-300">
+                    <label for="img-1"
+                        class="h-40 p-2 col-span-2 text-center rounded-md border-dashed border-2 border-gray-300">
                         <div class="h-full flex flex-column align-middle">
                             <p class="text-3xl text-gray-400"><i class="bi bi-card-image"></i></p>
                             <p class="">Upload a file or drag and drop</p>
                             <p class="text-sm">PNG, JPG, GIF up to 10MB</p>
-                            <input type="file" class="hidden" id="img-1" name="img-1" accept="image/*" >
+                            <input type="file" class="hidden" id="img-1" name="img-1" accept="image/*">
                         </div>
                     </label>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <div class="my-5 flex border-t-1 border-gray-300">
-            <button class="w-1/5 h-10 p-2 bg-blue-500 text-white mx-2 rounded-lg hover:shadow border border-blue-600" (click)="saveItem()">Save</button>
-            <button class="w-1/5 h-10 p-2 bg-gray-200  mx-2 rounded-lg hover:shadow border border-gray-600" (click)="cancel()">Cancel</button>
+            <button class="w-1/5 h-10 p-2 bg-blue-500 text-white mx-2 rounded-lg hover:shadow border border-blue-600"
+                (click)="saveItem()">Save</button>
+            <button class="w-1/5 h-10 p-2 bg-gray-200  mx-2 rounded-lg hover:shadow border border-gray-600"
+                (click)="cancel()">Cancel</button>
         </div>
     </form>
-</div> 
+</div>
