@@ -37,7 +37,7 @@ router.put('/', auth, (req, res) => {
     if (req && req.body !== undefined) {
         let data = req.body.user;
         data.updatedDate = moment().toDate().toISOString();
-        userModel.updateOne({ _id: data.id }, data).then(r => {
+        userModel.updateOne({ _id: data._id }, data).then(r => {
             res.status(200).send({ msg: "User Updated", status: "Success" });
         }).catch(err => res.status(400).send({ status: "Error", msg: "User not saved" }));
     }

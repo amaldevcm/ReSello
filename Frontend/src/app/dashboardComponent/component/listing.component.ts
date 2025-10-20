@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
+import * as moment from "moment";
 
 @Component({
     selector: 'app-listing',
@@ -10,7 +11,8 @@ export class ListingComponent implements OnInit {
 
     showListing = true;
     selectedItem = null;
-    editItem = false;
+    isEdited = false;
+    searchText = null;
 
     constructor() { }
 
@@ -18,7 +20,7 @@ export class ListingComponent implements OnInit {
     }
 
     createNew() {
-        this.editItem = false;
+        this.isEdited = false;
         this.selectedItem = {
             id: null,
             name: null,
@@ -34,5 +36,33 @@ export class ListingComponent implements OnInit {
 
     cancelEdit() {
         this.showListing = true;
+    }
+
+    formatDate(date) {
+        return moment(date).format('MMM DD YYYY');
+    }
+
+    capitalizeText(str) {
+        if (str == null || str.length === 0) {
+            return "-";
+        }
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+    searchListing() {
+        if (this.searchText == null) {
+            return this.listings;
+        }
+        return this.listings.filter(item => item['name'].contains(this.searchText));
+    }
+
+    editListing(item) {
+        this.showListing = false;
+        this.selectedItem = item;
+        this.isEdited = true;
+    }
+
+    deleteListing() {
+
     }
 }

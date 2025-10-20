@@ -25,6 +25,7 @@ export class ItemCreateComponent implements OnInit {
     @Output() output = new EventEmitter<any>();
 
     baseImg = null;
+    isImageUpdated = false;
 
     itemForm: FormGroup;
     constructor(private common: CommonService) {
@@ -36,45 +37,58 @@ export class ItemCreateComponent implements OnInit {
             image: new FormControl(''),
             status: new FormControl('pending'),
             description: new FormControl('')
-        })
+        });
     }
 
     ngOnInit(): void {
     }
 
     saveItem() {
-        this.common.uploadToAws(this.baseImg);
-        // let postData = {
-        //     _id: this.isEdited ? this.data._id : null,
-        //     userId: this.common.getUserData()._id,
-        //     name: this.data.name,
-        //     category: this.data.category,
-        //     price: this.data.price,
-        //     selling: this.data.selling,
-        //     image: this.data.image,
-        //     description: this.data.description,
-        //     status: this.data.status ? 'Active' : 'Inactive',
-        // }
+        let postData = {
+            _id: this.isEdited ? this.data._id : null,
+            userId: this.common.getUserData()._id,
+            name: this.data.name,
+            category: this.data.category,
+            price: this.data.price,
+            selling: this.data.selling,
+            image: null,
+            description: this.data.description,
+            status: this.data.status ? 'Active' : 'Inactive',
+        }
 
-        // if (this.isEdited) {
-        //     this.common.put('items', { item: postData }).subscribe(result => {
-        //         if (result !== undefined && result['status'] === 'Success') {
-        //             console.log('item saved');
-        //             this.cancel();
-        //         } else {
-        //             console.log('item not saved');
-        //         }
-        //     });
-        // } else {
-        //     this.common.post('items', { item: postData }).subscribe(result => {
-        //         if (result !== undefined && result['status'] === 'Success') {
-        //             console.log('item saved');
-        //             this.cancel();
-        //         } else {
-        //             console.log('item not saved');
-        //         }
-        //     });
-        // }
+        if (this.isImageUpdated) {
+            this.common.getPresignedUrl('upload', this.baseImg).subscribe(result => {
+                this.common.uploadToS3(result['url'], this.baseImg).subscribe(() => {
+                    postData.image = result['fileUrl'];
+                    this.saveDataToServer(postData);
+                });
+            });
+
+        } else {
+            this.saveDataToServer(postData);
+        }
+    }
+
+    saveDataToServer(data) {
+        if (this.isEdited) {
+            this.common.put('items', { item: data }).subscribe(result => {
+                if (result !== undefined && result['status'] === 'Success') {
+                    console.log('item saved');
+                    this.cancel();
+                } else {
+                    console.log('item not saved');
+                }
+            });
+        } else {
+            this.common.post('items', { item: data }).subscribe(result => {
+                if (result !== undefined && result['status'] === 'Success') {
+                    console.log('item saved');
+                    this.cancel();
+                } else {
+                    console.log('item not saved');
+                }
+            });
+        }
     }
 
     cancel() {
@@ -86,6 +100,7 @@ export class ItemCreateComponent implements OnInit {
     }
 
     setImage(event, callFrom) {
+        this.isImageUpdated = true;
         this.baseImg = event.target.files[0];
         let url = URL.createObjectURL(event.target.files[0]);
         if (callFrom === 'baseImage') {
@@ -95,5 +110,6 @@ export class ItemCreateComponent implements OnInit {
 
     removeImg() {
         this.data.image = null;
+        this.isImageUpdated = true;
     }
 }

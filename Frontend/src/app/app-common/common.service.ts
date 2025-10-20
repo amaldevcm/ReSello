@@ -71,7 +71,6 @@ export class CommonService {
                 'Authorization': localStorage.getItem('session-token')
             });
         }
-        console.log('Headers: ', this.headers);
         return this.http.get(this.serverurl + reqPath, { headers: this.headers, params: params });
     }
 
@@ -106,24 +105,17 @@ export class CommonService {
     }
 
     // Upload files to AWS server
-    uploadToAws(file) {
+    getPresignedUrl(folder = 'upload', file) {
         const param = {
             filename: file.name,
-            filetype: file.type
+            filetype: encodeURIComponent(file.type),
+            folderName: folder,
         }
 
-        this.http.get(this.serverurl + 'presignedUrl', { headers: this.headers, params: param }).subscribe(result => {
-            const header = new HttpHeaders({
-                'Content-Type': file.type
-            });
+        return this.http.get(this.serverurl + 'presignedUrl', { headers: this.headers, params: param });
+    }
 
-            this.http.put(result['url'], file, { headers: header }).subscribe(() => {
-                // this.get('getImgUrl', { imgKey: result['key'] }).subscribe(res => {
-                //     console.log(console.log('url: ', res['url']))
-                //     return res['url'];
-                // });
-                return null;
-            });
-        });
+    uploadToS3(url, file) {
+        return this.http.put(url, file, { headers: { 'Content-Type': encodeURIComponent(file.type) } });
     }
 }

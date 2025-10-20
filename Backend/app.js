@@ -21,7 +21,6 @@ app.use('/api/items', itemRoute);
 app.use('/api/users', userRoute);
 
 const s3 = new AWS.S3({
-    region: "us-east-1",
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
     region: process.env.AWS_REGION,
@@ -29,12 +28,15 @@ const s3 = new AWS.S3({
 });
 
 //  AWS connections
-app.get('/api/presignedUrl', auth, (req, res) => {
+app.get('/api/presignedUrl', (req, res) => {
+
+    const img_folder = req.query.folderName;
+    const img_key = `${img_folder}/${Date.now()}-${req.query.filename}`;
+
     const params = {
         Bucket: process.env.AWS_BUCKET_NAME,
-        Key: `uploads/${Date.now()}-${req.query.filename}`,
-        Expires: 60,
-        ContentType: req.query.filetype,
+        Key: img_key,
+        ContentType: decodeURIComponent(req.query.filetype),
         ACL: "public-read",
     };
 
@@ -43,16 +45,19 @@ app.get('/api/presignedUrl', auth, (req, res) => {
             console.log(err);
             res.status(400).send({ status: "Error", msg: "Error fetching AWS url" });
         } else {
-            res.json({ url, key: params.Key });
+            res.json({
+                url,
+                fileUrl: `https://${process.env.AWS_BUCKET_NAME}.s3.amazonaws.com/${params.Key}`,
+                key: params.Key
+            });
         }
     });
 });
 
-app.get('/api/getImgUrl', auth, (req, res) => {
+app.get('/api/getImgUrl', (req, res) => {
     const params = {
         Bucket: process.env.AWS_BUCKET_NAME,
         Key: req.query.imgKey,
-        Expires: 60,
     }
 
     s3.getSignedUrl("getObject", params, (err, url) => {
