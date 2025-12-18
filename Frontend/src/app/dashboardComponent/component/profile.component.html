@@ -8,8 +8,7 @@
                 <div class="flex flex-col items-center">
                     <div class="relative">
                         <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                            alt="Profile"
-                            class="w-32 h-32 rounded-full object-cover border-4 border-white shadow-md" />
+                            alt="Profile" class="w-32 h-32 rounded-full object-cover border-4 border-white shadow-md" />
                         <button
                             class="absolute bottom-0 right-0 bg-blue-600 p-2 rounded-full text-white hover:bg-blue-700">
                             <i class="bi bi-camera"></i>
@@ -20,7 +19,7 @@
                     </h2>
 
                     <div>
-                        <span>Rating: 
+                        <span>Rating:
                             <i class="bi bi-star-fill text-yellow-500"></i>
                             {{user.rating? user.rating: 0}}
                         </span>
@@ -70,7 +69,6 @@
                                 Address
                             </label>
                             <input type="text" id="address" name="address" value={{user.address}}
-                            
                                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
                         </div>
                     </div>
