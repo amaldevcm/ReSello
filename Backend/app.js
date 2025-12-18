@@ -13,12 +13,16 @@ app.use(express.json());
 
 const userRoute = require('./Routes/userRoutes');
 const itemRoute = require('./Routes/itemRoutes');
+const categoryRoute = require('./Routes/categoryRoutes');
 
 // Item data processing
 app.use('/api/items', itemRoute);
 
 // User data processing
 app.use('/api/users', userRoute);
+
+// Categories data processing
+app.use('/api/categories', categoryRoute);
 
 const s3 = new AWS.S3({
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,

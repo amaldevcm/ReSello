@@ -5,9 +5,15 @@ const categoryModel = new mongoose.Schema({
         type: String,
         required: true
     },
-    defaultIcon: String,
-    status: Boolean
+    status: {
+        type: Boolean,
+        default: true
+    },
+    createdDate: {
+        type: Date,
+        required: false
+    }
 })
 
-const category = new mongoose.model(categoryModel, 'category');
+const category = new mongoose.model('category', categoryModel);
 module.exports = category;
