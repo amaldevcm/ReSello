@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 import { BehaviorSubject } from "rxjs";
 
 interface User {
@@ -32,7 +33,7 @@ export class CommonService {
 
     serverurl = "https://resello-backend.onrender.com/api/";
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private router: Router) {
         const savedUser = localStorage.getItem('user');
         if (savedUser) {
             this.userSubject.next(JSON.parse(savedUser));
@@ -64,6 +65,13 @@ export class CommonService {
         localStorage.removeItem('user');
     }
 
+    logout() {
+        this.clearUser();
+        localStorage.removeItem('session-token');
+        this.isLoggedIn = false;
+        this.router.navigate(['/login']);
+    }
+
     get(reqPath: String, params = null) {
         if (localStorage.getItem('session-token') !== null) {
             this.headers = new HttpHeaders({
@@ -75,7 +83,7 @@ export class CommonService {
     }
 
     post(reqPath: String, body: any = null) {
-        if (localStorage.getItem('seesion-token') !== null) {
+        if (localStorage.getItem('session-token') !== null) {
             this.headers = new HttpHeaders({
                 'Content-Type': 'application/json',
                 'Authorization': localStorage.getItem('session-token')
@@ -85,7 +93,7 @@ export class CommonService {
     }
 
     put(reqPath: String, body: any = null) {
-        if (localStorage.getItem('seesion-token') !== null) {
+        if (localStorage.getItem('session-token') !== null) {
             this.headers = new HttpHeaders({
                 'Content-Type': 'application/json',
                 'Authorization': localStorage.getItem('session-token')
@@ -95,7 +103,7 @@ export class CommonService {
     }
 
     delete(reqPath: String, id: Number) {
-        if (localStorage.getItem('seesion-token') !== null) {
+        if (localStorage.getItem('session-token') !== null) {
             this.headers = new HttpHeaders({
                 'Content-Type': 'application/json',
                 'Authorization': localStorage.getItem('session-token')

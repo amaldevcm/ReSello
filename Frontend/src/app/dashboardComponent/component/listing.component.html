@@ -35,10 +35,10 @@
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Product
                     </th>
-                    <!-- <th scope="col"
+                    <th scope="col"
                         class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Category
-                    </th> -->
+                    </th>
                     <th scope="col"
                         class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Price
@@ -62,7 +62,7 @@
                 @for (item of searchListing(); track item._id) {
                 <tr>
                     <td class="p-2 text-sm text-gray-500">{{capitalizeText(item['name'])}}</td>
-                    <!-- <td class="p-2 text-sm text-gray-500 text-center">{{item['categroy']}}</td> -->
+                    <td class="p-2 text-sm text-gray-500 text-center">{{capitalizeText(item['category'])}}</td>
                     <td class="p-2 text-sm text-gray-500 text-center"><i
                             class="bi bi-currency-dollar"></i>{{item['price']}}</td>
                     <td class="p-2 text-sm text-gray-500 text-center">{{capitalizeText(item['status'])}}</td>

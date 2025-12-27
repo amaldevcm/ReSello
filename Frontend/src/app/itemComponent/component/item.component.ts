@@ -9,25 +9,33 @@ import { CommonService } from "src/app/app-common/common.service";
     styleUrls: ['./item.component.scss']
 })
 
-export class ItemsComponent implements OnInit{
+export class ItemsComponent implements OnInit {
     itemList = [];
     isEdited = false;
-    editData:any = null;
+    editData: any = null;
 
-    constructor(private common: CommonService) {}
+    constructor(private common: CommonService) { }
 
     ngOnInit(): void {
-        this.getItemList();    
+        this.getItemList();
     }
 
     getItemList() {
-        this.common.get("items").subscribe(response => {
-            if(response && response !== undefined) {
-                this.itemList = response['items'];
-                this.itemList.forEach(item => {
-                    item.createdDate = item.createdDate? moment(item.createdDate).format('DD-MM-YYYY'): null;
-                    item.updatedDate = item.updatedDate? moment(item.updatedDate).format('DD-MM-YYYY'): null;
-                });
+        this.common.get("items").subscribe({
+            next: (response) => {
+                if (response && response !== undefined) {
+                    this.itemList = response['items'];
+                    this.itemList.forEach(item => {
+                        item.createdDate = item.createdDate ? moment(item.createdDate).format('DD-MM-YYYY') : null;
+                        item.updatedDate = item.updatedDate ? moment(item.updatedDate).format('DD-MM-YYYY') : null;
+                    });
+                }
+            },
+            error: (error) => {
+                if (error.status === 401 || error.status === 403) {
+                    this.common.logout();
+                }
+                console.error('There was an error!', error);
             }
         })
     }

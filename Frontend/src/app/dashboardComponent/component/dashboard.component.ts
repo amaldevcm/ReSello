@@ -25,10 +25,19 @@ export class DashboardComponent implements OnInit {
     }
 
     getListings() {
-        this.common.get('items/listing?id=' + this.user._id).subscribe((result) => {
-            if (result) {
-                this.analytics = result['analytics'];
-                this.listings = result['items'];
+        this.common.get('items/listing?id=' + this.user._id).subscribe({
+            next: (result) => {
+                if (result) {
+                    this.analytics = result['analytics'];
+                    this.listings = result['items'];
+                }
+            },
+
+            error: (error) => {
+                if (error.status === 401 || error.status === 403) {
+                    this.common.logout();
+                }
+                console.error('There was an error!', error);
             }
         });
     }

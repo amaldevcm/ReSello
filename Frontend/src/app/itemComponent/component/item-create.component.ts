@@ -26,6 +26,7 @@ export class ItemCreateComponent implements OnInit {
 
     baseImg = null;
     isImageUpdated = false;
+    categories = [];
 
     itemForm: FormGroup;
     constructor(private common: CommonService) {
@@ -41,8 +42,16 @@ export class ItemCreateComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.getCategories();
     }
 
+    getCategories() {
+        this.common.get('categories').subscribe((result: Array<any>) => {
+            if (result !== undefined) {
+                this.categories = result;
+            }
+        });
+    }
     saveItem() {
         let postData = {
             _id: this.isEdited ? this.data._id : null,
@@ -80,12 +89,21 @@ export class ItemCreateComponent implements OnInit {
                 }
             });
         } else {
-            this.common.post('items', { item: data }).subscribe(result => {
-                if (result !== undefined && result['status'] === 'Success') {
-                    console.log('item saved');
-                    this.cancel();
-                } else {
-                    console.log('item not saved');
+            this.common.post('items', { item: data }).subscribe({
+                next: (result) => {
+                    if (result !== undefined && result['status'] === 'Success') {
+                        console.log('item saved');
+                        this.cancel();
+                    } else {
+                        console.log('item not saved');
+                    }
+                },
+
+                error: (error) => {
+                    if (error.status === 401 || error.status === 403) {
+                        this.common.logout();
+                    }
+                    console.error('There was an error!', error);
                 }
             });
         }
