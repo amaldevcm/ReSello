@@ -45,7 +45,6 @@ export class UserCreateComponent implements OnInit {
     }
 
     saveNewUser() {
-        // if(this.f.)
         if (this.data.password !== this.data.confirmPass) {
             this.data.confirmPass = '';
             this.data.password = '';

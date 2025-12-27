@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { BehaviorSubject } from "rxjs";
+import { environment } from "src/environments/environment";
 
 interface User {
     _id: Object,
@@ -31,7 +32,7 @@ export class CommonService {
     private userSubject = new BehaviorSubject<User | null>(null);
     user$ = this.userSubject.asObservable();
 
-    serverurl = "https://resello-backend.onrender.com/api/";
+    serverurl = environment.serverUrl + '/';
 
     constructor(private http: HttpClient, private router: Router) {
         const savedUser = localStorage.getItem('user');
