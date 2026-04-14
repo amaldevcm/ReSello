@@ -46,13 +46,13 @@ router.get('/listing', auth, (req, res) => {
     if (id) {
         itemModel.find({ userId: id }).then(result => {
             const analytics = {
-                totalPending: 0,
+                totalProfit: 0,
                 totalSales: 0,
                 totalPending: 0
             };
 
             result.forEach(item => {
-                if (item.status = 'sold') {
+                if (item.status === 'sold') {
                     analytics['totalProfit'] += item.price;
                     analytics['totalSales'] += 1;
                 } else {

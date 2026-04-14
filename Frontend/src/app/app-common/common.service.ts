@@ -12,7 +12,8 @@ interface User {
     address: String,
     zipcode: Number,
     role: String,
-    rating: Number
+    rating: Number,
+    image: String
 }
 
 @Injectable({
@@ -52,27 +53,32 @@ export class CommonService {
         });
     }
 
+    // Set user data and store in local storage
     setUserData(data) {
         this.userSubject.next(data);
         localStorage.setItem('user', JSON.stringify(data));
     }
 
+    // Get current user data
     getUserData() {
         return this.userSubject.getValue();
     }
 
+    // Clear user data from service and local storage
     clearUser() {
         this.userSubject.next(null);
         localStorage.removeItem('user');
     }
 
+    // Logout user
     logout() {
         this.clearUser();
         localStorage.removeItem('session-token');
         this.isLoggedIn = false;
-        this.router.navigate(['/login']);
+        this.router.navigate(['login']);
     }
 
+    // HTTP Methods
     get(reqPath: String, params = null) {
         if (localStorage.getItem('session-token') !== null) {
             this.headers = new HttpHeaders({

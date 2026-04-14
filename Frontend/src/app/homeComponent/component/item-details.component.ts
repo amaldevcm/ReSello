@@ -6,8 +6,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
     styleUrls: ['./home.component.scss']
 })
 
-export class ItemDetails implements OnInit{
-    @Output() closeItemDetails:EventEmitter<boolean> = new EventEmitter();
+export class ItemDetails implements OnInit {
+    @Output() closeItemDetails: EventEmitter<boolean> = new EventEmitter();
     @Input() item;
 
     selectedImage = '';
@@ -16,8 +16,8 @@ export class ItemDetails implements OnInit{
     constructor() { }
 
     ngOnInit(): void {
-        this.selectedColor = this.item.colors[0]
-        this.selectedImage = this.selectedColor.images.length !== 0? this.selectedColor.images[0]: '../assets/No-Image-Placeholder.svg';
+        // this.selectedColor = this.item.colors[0]
+        // this.selectedImage = this.selectedColor.images.length !== 0? this.selectedColor.images[0]: '../assets/No-Image-Placeholder.svg';
     }
 
     selectImage(image) {

@@ -3,12 +3,13 @@
 
     <div class="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
         <div class="md:flex">
+
             <!-- Profile Sidebar -->
             <div class="md:w-1/3 bg-gray-50 p-6 border-r border-gray-200">
                 <div class="flex flex-col items-center">
                     <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                            alt="Profile" class="w-32 h-32 rounded-full object-cover border-4 border-white shadow-md" />
+                        <img src="{{user.image? user.image: '../assets/profile_pic.jpg'}}" alt="Profile"
+                            class="w-32 h-32 rounded-full object-cover border-4 border-white shadow-md" />
                         <button
                             class="absolute bottom-0 right-0 bg-blue-600 p-2 rounded-full text-white hover:bg-blue-700">
                             <i class="bi bi-camera"></i>
@@ -27,6 +28,7 @@
                     </div>
                 </div>
             </div>
+
             <!-- Profile Form -->
             <div class="md:w-2/3 p-6">
                 <form>
@@ -52,18 +54,18 @@
                             <input type="tel" id="phone" name="phone" value={{user.phone}}
                                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
                         </div>
+
                         <div>
                             <label for="role" class="block text-sm font-medium text-gray-700 mb-1">
                                 Role
                             </label>
-                            <select name="role" id="role" [(ngModel)]="user.role"
+                            <select name="role" id="role" [(ngModel)]="user.role" [disabled]="user.role == 'user'"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500">
                                 <option value="admin">Admin</option>
                                 <option value="user">User</option>
                             </select>
-                            <!-- <input type="text" id="role" name="role" value={{user.role}}
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500" /> -->
                         </div>
+
                         <div class="col-span-2">
                             <label for="address" class="block text-sm font-medium text-gray-700 mb-1">
                                 Address

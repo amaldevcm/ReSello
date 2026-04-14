@@ -8,7 +8,7 @@ import { HttpClient } from "@angular/common/http";
     styleUrls: ['./home.component.scss'],
 })
 
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit {
     isAdmin: boolean = false;
     itemList = [];
     cart = [];
@@ -43,9 +43,9 @@ export class HomeComponent implements OnInit{
 
     getItemList() {
         this.common.get("items").subscribe(result => {
-            if(result && result !== undefined) {
-                result['items'].forEach(item =>{
-                    item.discountPrice = item.selling - (item.selling*item.discount)/100;
+            if (result && result !== undefined) {
+                result['items'].forEach(item => {
+                    item.discountPrice = item.selling - (item.selling * item.discount) / 100;
                 });
                 this.itemList = JSON.parse(JSON.stringify(result['items']));
                 this.itemList = this.itemList.concat(result['items']);
@@ -59,7 +59,7 @@ export class HomeComponent implements OnInit{
 
     changeQty(data, opr) {
         data.cartQty = Number(data.cartQty);
-        if(opr === "subtract") {
+        if (opr === "subtract") {
             data.cartQty -= 1;
         } else {
             data.cartQty += 1;
@@ -72,15 +72,15 @@ export class HomeComponent implements OnInit{
         this.cart = this.itemList.filter(data => data.cartQty > 0);
         this.common.cart = this.cart;
         this.cart.forEach(item => {
-            this.totalAmount += Number(item.cartQty)*Number(item.discountPrice);
+            this.totalAmount += Number(item.cartQty) * Number(item.discountPrice);
         });
     }
 
-    toggleCartItems(calledFrom = 'close', data=null){
-        if(calledFrom === 'close'){
+    toggleCartItems(calledFrom = 'close', data = null) {
+        if (calledFrom === 'close') {
             this.showItemDetails = false;
             this.showCartItems = false;
-        } else if(calledFrom === 'item') {
+        } else if (calledFrom === 'item') {
             this.showItemDetails = true;
             this.showCartItems = false;
         } else {
@@ -90,12 +90,13 @@ export class HomeComponent implements OnInit{
         this.selectedItem = data;
     }
 
-    toggleItemDetails(itemData={}, action=false) {
+    toggleItemDetails(itemData: any, action = false) {
         console.log('called toggle')
+        this.selectedItem = itemData;
         this.showItemDetails = action;
     }
 
-    btnClick(){
+    btnClick() {
         console.log('called')
     }
 }
