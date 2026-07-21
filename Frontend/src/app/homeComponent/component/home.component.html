@@ -33,5 +33,6 @@
 
 <div class="absolute right-0 top-0 h-full w-1/3 bg-white p-1 shadow-lg border-l border-gray-200"
     [hidden]="!showItemDetails">
-    <app-item-detail [item]="selectedItem" (closeItemDetails)="toggleItemDetails(false)"></app-item-detail>
+    <app-item-detail [item]="selectedItem" (closeItemDetails)="toggleItemDetails(false)"
+      (itemPurchased)="onItemPurchased()"></app-item-detail>
 </div>

@@ -41,6 +41,24 @@ router.put('/', auth, (req, res) => {
     }
 });
 
+router.delete('/', auth, (req, res) => {
+    const id = req.query.id;
+    if (!id) {
+        return res.status(400).send({ status: "Error", msg: "Item id required" });
+    }
+    itemModel.findById(id).then(item => {
+        if (!item) {
+            return res.status(404).send({ status: "Error", msg: "Item not found" });
+        }
+        if (item.userId.toString() !== req.userId) {
+            return res.status(403).send({ status: "Error", msg: "Not authorized to delete this item" });
+        }
+        itemModel.deleteOne({ _id: id }).then(() => {
+            res.status(200).send({ msg: "Item deleted", status: "Success" });
+        }).catch(err => res.status(400).send({ status: "Error", msg: "Item not deleted" }));
+    }).catch(err => res.status(400).send({ status: "Error", msg: "Item not found" }));
+});
+
 router.get('/listing', auth, (req, res) => {
     const id = req.query.id
     if (id) {

@@ -109,7 +109,7 @@ export class CommonService {
         return this.http.put(this.serverurl + reqPath, body, { headers: this.headers });
     }
 
-    delete(reqPath: String, id: Number) {
+    delete(reqPath: String, id: String) {
         if (localStorage.getItem('session-token') !== null) {
             this.headers = new HttpHeaders({
                 'Content-Type': 'application/json',

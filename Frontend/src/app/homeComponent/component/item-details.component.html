@@ -48,5 +48,11 @@
         <button class="w-6 h-6 me-2 rounded-full bg-black border-grey-500 border-1 hover:shadow-inner"></button>
       </div>
     </div>
+
+    <button *ngIf="!isOwnItem() && item?.status !== 'sold'"
+      class="mt-4 w-full rounded-md bg-black text-white py-2 hover:opacity-90" (click)="buyItem()">
+      Buy Now
+    </button>
+    <span *ngIf="item?.status === 'sold'" class="mt-4 font-medium text-gray-500">Sold</span>
   </div>
 </div>

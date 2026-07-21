@@ -69,7 +69,7 @@
                     <td class="p-2 text-sm text-gray-500 text-center">{{formatDate(item['createdDate'])}}</td>
                     <td class="p-2 text-sm text-right">
                         <button (click)="editListing(item)"><i class="p-2 bi bi-pencil-square"></i></button>
-                        <button (click)="deleteListing()"><i class="p-2 bi bi-trash-fill"></i></button>
+                        <button (click)="deleteListing(item)"><i class="p-2 bi bi-trash-fill"></i></button>
                     </td>
                 </tr>
                 } @empty {

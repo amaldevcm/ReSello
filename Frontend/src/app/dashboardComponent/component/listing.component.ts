@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import * as moment from "moment";
+import { CommonService } from "src/app/app-common/common.service";
 
 @Component({
     selector: 'app-listing',
@@ -14,7 +15,7 @@ export class ListingComponent implements OnInit {
     isEdited = false;
     searchText = null;
 
-    constructor() { }
+    constructor(private common: CommonService) { }
 
     ngOnInit(): void {
     }
@@ -62,7 +63,24 @@ export class ListingComponent implements OnInit {
         this.isEdited = true;
     }
 
-    deleteListing() {
-
+    deleteListing(item) {
+        if (!confirm('Delete this listing?')) {
+            return;
+        }
+        this.common.delete('items', item._id).subscribe({
+            next: (result) => {
+                if (result && result['status'] === 'Success') {
+                    this.listings = this.listings.filter(listing => listing._id !== item._id);
+                } else {
+                    console.log('item not deleted');
+                }
+            },
+            error: (error) => {
+                if (error.status === 401 || error.status === 403) {
+                    this.common.logout();
+                }
+                console.error('There was an error!', error);
+            }
+        });
     }
 }

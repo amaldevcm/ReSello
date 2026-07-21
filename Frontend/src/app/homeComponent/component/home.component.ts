@@ -96,6 +96,11 @@ export class HomeComponent implements OnInit {
         this.showItemDetails = action;
     }
 
+    onItemPurchased() {
+        this.getItemList();
+        this.toggleItemDetails(false);
+    }
+
     btnClick() {
         console.log('called')
     }
